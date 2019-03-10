@@ -108,10 +108,9 @@
 			isa = PBXGroup;
 			children = (
 				16BB47D42096C94B003712CF /* README.md */,
-				16515685201F902800C0D872 /* Modal */,
+				16515685201F902800C0D872 /* Model */,
 				1651568C201FA1AE00C0D872 /* View */,
 				1651568D201FA1B300C0D872 /* Controller */,
-				16515689201F9FB900C0D872 /* Utility */,
 				16515688201F91BC00C0D872 /* Supporting Files */,
 				16C86623202CAB08005FEBE1 /* Library */,
 			);
@@ -129,35 +128,28 @@
 			path = "Extensions + Utilities";
 			sourceTree = "<group>";
 		};
-		16515685201F902800C0D872 /* Modal */ = {
+		16515685201F902800C0D872 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				16F6200B20188E1C00CC7900 /* Scene.swift */,
 				16B3DF66203416F400474E61 /* Step.swift */,
 				16515686201F904400C0D872 /* VirtualObject.swift */,
 			);
-			path = Modal;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		16515688201F91BC00C0D872 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				16290150200ED57B00289165 /* AppDelegate.swift */,
+				1651568A201F9FCD00C0D872 /* Extensions.swift */,
+				1651568E201FBDF600C0D872 /* Launch.storyboard */,
 				16290159200ED57B00289165 /* Assets.xcassets */,
 				16290152200ED57B00289165 /* art.scnassets */,
-				1651568E201FBDF600C0D872 /* Launch.storyboard */,
 				1629015E200ED57B00289165 /* Info.plist */,
 				16D8FCFD2021DC6A004FF872 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		16515689201F9FB900C0D872 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				1651568A201F9FCD00C0D872 /* Extensions.swift */,
-			);
-			path = Utility;
 			sourceTree = "<group>";
 		};
 		1651568C201FA1AE00C0D872 /* View */ = {

@@ -1,13 +1,11 @@
 
-// This code is taken from (GitHub, 2018)
-// GitHub, (2018). ARKitRectangleDetection. [online]. Available at: https://github.com/mludowise/ARKitRectangleDetection [Accessed: 20 April 2018].
-// Some modifications to the code might have been made to adjust this code for the application's needs
-
 import Foundation
 import ARKit
 import Vision
 
 class PlaneRectangle: NSObject {
+    
+    // MARK: - Variables
     
     // Plane anchor this rectangle is attached to
     private(set) var anchor: ARPlaneAnchor
@@ -20,6 +18,8 @@ class PlaneRectangle: NSObject {
     
     // Orientation of the rectangle based on how much it's rotated around the y axis
     private(set) var orientation: Float
+    
+    // MARK: - Initialization
     
     // Creates a rectangleon 3D space based on a VNRectangleObservation found in a given ARSCNView
     // Returns nil if no plane can be found that contains the rectangle
@@ -56,16 +56,28 @@ fileprivate enum RectangleCorners {
     case bottomRight(topRight: SCNVector3, bottomLeft: SCNVector3, bottomRight: SCNVector3)
 }
 
+// MARK: - Geometry Functions
 
 // Finds 3d vector points for the corners of a rectangle on a plane in a given scene
 // Returns 3 corners representing the rectangle as well as the anchor for its plane
-fileprivate func getCorners(for rectangle: VNRectangleObservation, in sceneView: ARSCNView) -> (corners: RectangleCorners, anchor: ARPlaneAnchor)? {
+fileprivate func getCorners(
+    for rectangle: VNRectangleObservation,
+    in sceneView: ARSCNView
+    ) -> (corners: RectangleCorners, anchor: ARPlaneAnchor)? {
     
     // Perform a hittest on each corner to find intersecting surfaces
-    let tl = sceneView.hitTest(sceneView.convertFromCamera(rectangle.topLeft), types: .existingPlaneUsingExtent)
-    let tr = sceneView.hitTest(sceneView.convertFromCamera(rectangle.topRight), types: .existingPlaneUsingExtent)
-    let bl = sceneView.hitTest(sceneView.convertFromCamera(rectangle.bottomLeft), types: .existingPlaneUsingExtent)
-    let br = sceneView.hitTest(sceneView.convertFromCamera(rectangle.bottomRight), types: .existingPlaneUsingExtent)
+    let tl = sceneView.hitTest(
+        sceneView.convertFromCamera(rectangle.topLeft),
+        types: .existingPlaneUsingExtent)
+    let tr = sceneView.hitTest(
+        sceneView.convertFromCamera(rectangle.topRight),
+        types: .existingPlaneUsingExtent)
+    let bl = sceneView.hitTest(
+        sceneView.convertFromCamera(rectangle.bottomLeft),
+        types: .existingPlaneUsingExtent)
+    let br = sceneView.hitTest(
+        sceneView.convertFromCamera(rectangle.bottomRight),
+        types: .existingPlaneUsingExtent)
     
     print("tl: \(tl.count) tr: \(tr.count) br: \(br.count) bl: \(bl.count)")
     
@@ -77,7 +89,7 @@ fileprivate func getCorners(for rectangle: VNRectangleObservation, in sceneView:
     let hitResultAnchorComparator: (ARHitTestResult, ARHitTestResult) -> Bool = { (hit1, hit2) in
         hit1.anchor == hit2.anchor
     }
-
+    
     
     // Check top & left corners for a common anchor
     var surfaces = filterByIntersection([tl, tr, bl], where: hitResultAnchorComparator)
@@ -86,11 +98,13 @@ fileprivate func getCorners(for rectangle: VNRectangleObservation, in sceneView:
         let blHit = surfaces[2].first,
         let anchor = tlHit.anchor as? ARPlaneAnchor {
         
-        print("Found top left corners: \(tlHit.worldVector), \(trHit.worldVector), \(blHit.worldVector)")
+        print("Found top left corners: \(tlHit.worldVector), \(trHit.worldVector), " +
+            "\(blHit.worldVector)")
         
-        return (.topLeft(topLeft: tlHit.worldVector,
-                         topRight: trHit.worldVector,
-                         bottomLeft: blHit.worldVector),
+        return (.topLeft(
+            topLeft: tlHit.worldVector,
+            topRight: trHit.worldVector,
+            bottomLeft: blHit.worldVector),
                 anchor)
     }
     
@@ -101,11 +115,14 @@ fileprivate func getCorners(for rectangle: VNRectangleObservation, in sceneView:
         let brHit = surfaces[2].first,
         let anchor = tlHit.anchor as? ARPlaneAnchor {
         
-        print("Found top right corners: \(tlHit.worldVector), \(trHit.worldVector), \(brHit.worldVector)")
+        let str = "Found top right corners: \(tlHit.worldVector), \(trHit.worldVector), " +
+        "\(brHit.worldVector)"
+        print(str)
         
-        return (.topRight(topLeft: tlHit.worldVector,
-                          topRight: trHit.worldVector,
-                          bottomRight: brHit.worldVector),
+        return (.topRight(
+            topLeft: tlHit.worldVector,
+            topRight: trHit.worldVector,
+            bottomRight: brHit.worldVector),
                 anchor)
     }
     
@@ -116,11 +133,14 @@ fileprivate func getCorners(for rectangle: VNRectangleObservation, in sceneView:
         let brHit = surfaces[2].first,
         let anchor = tlHit.anchor as? ARPlaneAnchor {
         
-        print("Found bottom left corners: \(tlHit.worldVector), \(blHit.worldVector), \(brHit.worldVector)")
+        let str = "Found bottom left corners: \(tlHit.worldVector), \(blHit.worldVector), " +
+            "\(brHit.worldVector)"
+        print(str)
         
-        return (.bottomLeft(topLeft: tlHit.worldVector,
-                            bottomLeft: blHit.worldVector,
-                            bottomRight: brHit.worldVector),
+        return (.bottomLeft(
+            topLeft: tlHit.worldVector,
+            bottomLeft: blHit.worldVector,
+            bottomRight: brHit.worldVector),
                 anchor)
     }
     
@@ -131,11 +151,14 @@ fileprivate func getCorners(for rectangle: VNRectangleObservation, in sceneView:
         let brHit = surfaces[2].first,
         let anchor = trHit.anchor as? ARPlaneAnchor {
         
-        print("Found bottom right corners: \(trHit.worldVector), \(blHit.worldVector), \(brHit.worldVector)")
+        let str = "Found bottom right corners: \(trHit.worldVector), \(blHit.worldVector), " +
+            "\(brHit.worldVector)"
+        print(str)
         
-        return (.bottomRight(topRight: trHit.worldVector,
-                             bottomLeft: blHit.worldVector,
-                             bottomRight: brHit.worldVector),
+        return (.bottomRight(
+            topRight: trHit.worldVector,
+            bottomLeft: blHit.worldVector,
+            bottomRight: brHit.worldVector),
                 anchor)
     }
     
@@ -144,6 +167,8 @@ fileprivate func getCorners(for rectangle: VNRectangleObservation, in sceneView:
 }
 
 extension RectangleCorners {
+    
+    // MARK: - Variables
     
     // Returns width based on left and right corners for one either top or bottom side
     var width: CGFloat {
@@ -198,13 +223,17 @@ extension RectangleCorners {
                 let distB = c.distance(from: a)
                 let distC = a.distance(from: b)
                 
-                let cosC = ((distA * distA) + (distB * distB) - (distC * distC)) / (2 * distA * distB)
+                let cosC = ((distA * distA) +
+                    (distB * distB) -
+                    (distC * distC)) /
+                    (2 * distA * distB)
                 return acos(cosC)
             }
         }
     }
     
-    // Returns the orientation of the rectangle based on how much the rectangle is rotated around the y axis
+    // Returns the orientation of the rectangle based on how much the rectangle is rotated around
+    // the y axis
     var orientation: Float {
         get {
             switch self {

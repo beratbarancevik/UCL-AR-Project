@@ -1,22 +1,23 @@
 
-// This code is taken from (GitHub, 2018)
-// GitHub, (2018). ARKitRectangleDetection. [online]. Available at: https://github.com/mludowise/ARKitRectangleDetection [Accessed: 20 April 2018].
-// Some modifications to the code might have been made to adjust this code for the application's needs
-
 import ARKit
 
 class SurfaceNode: SCNNode {
     
+    // MARK: - Variables
+    
     private(set) var anchor: ARPlaneAnchor
     private(set) var planeGeometry: SCNPlane
     
+    // MARK: - Initialization
+    
     init(anchor: ARPlaneAnchor) {
-        
         self.anchor = anchor
         
         // Create the 3D plane geometry with the dimensions reported
         // by ARKit in the ARPlaneAnchor instance
-        self.planeGeometry = SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.z))
+        self.planeGeometry = SCNPlane(
+            width: CGFloat(anchor.extent.x),
+            height: CGFloat(anchor.extent.z))
         
         super.init()
         
@@ -29,7 +30,8 @@ class SurfaceNode: SCNNode {
         // Set grid image to 1" per square (image is 0.4064 m)
         material.diffuse.wrapT = .repeat
         material.diffuse.wrapS = .repeat
-        material.diffuse.contentsTransform = SCNMatrix4MakeScale(2.46062992 * anchor.extent.x, 2.46062992 * anchor.extent.z, 0)
+        material.diffuse.contentsTransform = SCNMatrix4MakeScale(
+            2.46062992 * anchor.extent.x, 2.46062992 * anchor.extent.z, 0)
         self.planeGeometry.materials = [material]
         
         let planeNode = SCNNode(geometry: self.planeGeometry)
@@ -48,6 +50,8 @@ class SurfaceNode: SCNNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - UI Manipulation Functions
     
     func update(_ anchor: ARPlaneAnchor) {
         self.planeGeometry.width = CGFloat(anchor.extent.x)

@@ -1,11 +1,10 @@
 
-// This code is taken from (GitHub, 2018)
-// GitHub, (2018). ARKitRectangleDetection. [online]. Available at: https://github.com/mludowise/ARKitRectangleDetection [Accessed: 20 April 2018].
-// Some modifications to the code might have been made to adjust this code for the application's needs
-
 import ARKit
 
 extension SCNVector3 {
+    
+    // MARK: - Geometry Functions
+    
     func distance(from vector: SCNVector3) -> CGFloat {
         let deltaX = self.x - vector.x
         let deltaY = self.y - vector.y
@@ -21,7 +20,7 @@ extension SCNVector3 {
         return SCNVector3Make(midX, midY, midZ)
     }
     
-    // from Apples demo APP
+    // from Apple's demo app
     static func positionFromTransform(_ transform: matrix_float4x4) -> SCNVector3 {
         return SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
     }

@@ -2,23 +2,31 @@
 import UIKit
 import SwiftMessages
 
-// paddings for customised text field
 extension UITextField {
+    
 	func setLeftPadding(_ amount: CGFloat) {
-		let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+		let paddingView = UIView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: amount,
+            height: self.frame.size.height))
 		self.leftView = paddingView
 		self.leftViewMode = .always
 	}
 	
 	func setRightPadding(_ amount: CGFloat) {
-		let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+		let paddingView = UIView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: amount,
+            height: self.frame.size.height))
 		self.rightView = paddingView
 		self.rightViewMode = .always
 	}
 }
 
-// customised messages using SwiftMessages
 extension UIViewController {
+    
 	func showError() {
 		let view = MessageView.viewFromNib(layout: .statusLine)
 		view.configureTheme(.error)

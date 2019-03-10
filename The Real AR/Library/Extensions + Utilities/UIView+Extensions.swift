@@ -1,12 +1,10 @@
 
-// This code is taken from (GitHub, 2018)
-// GitHub, (2018). ARKitRectangleDetection. [online]. Available at: https://github.com/mludowise/ARKitRectangleDetection [Accessed: 20 April 2018].
-// Some modifications to the code might have been made to adjust this code for the application's needs
-
 import Foundation
 import UIKit
 
 extension UIView {
+    
+    // MARK: - Camera-Geometry Functions
     
     // Converts a point from camera coordinates (0 to 1 or -1 to 0, depending on orientation)
     // into a point within the given view
@@ -26,7 +24,7 @@ extension UIView {
             return CGPoint(x: point.y * frame.width, y: point.x * frame.height)
         }
     }
-
+    
     // Converts a rect from camera coordinates (0 to 1 or -1 to 0, depending on orientation)
     // into a point within the given view
     func convertFromCamera(_ rect: CGRect) -> CGRect {
@@ -61,6 +59,10 @@ extension UIView {
             y = rect.origin.x
         }
         
-        return CGRect(x: x * frame.width, y: y * frame.height, width: w * frame.width, height: h * frame.height)
+        return CGRect(
+            x: x * frame.width,
+            y: y * frame.height,
+            width: w * frame.width,
+            height: h * frame.height)
     }
 }

@@ -3,13 +3,12 @@ import UIKit
 
 class AddNameViewController: UIViewController, UITextFieldDelegate {
 	
-	// MARK: outlets
+	// MARK: - UI Variables
 
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var proceedButton: UIButton!
 	
-	
-	// MARK: view controller
+	// MARK: - View Controller Life Cycle Methods
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +16,10 @@ class AddNameViewController: UIViewController, UITextFieldDelegate {
 		nameTextField.setLeftPadding(20)
 		nameTextField.setRightPadding(20)
 		nameTextField.delegate = self
-		nameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+		nameTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged)
 		nameTextField.becomeFirstResponder()
 		
 		proceedButton.layer.cornerRadius = 25
@@ -26,8 +28,7 @@ class AddNameViewController: UIViewController, UITextFieldDelegate {
 		proceedButton.addTarget(self, action: #selector(proceedButtonDidTap), for: .touchUpInside)
     }
 	
-	
-	// MARK: listeners
+	// MARK: User Interaction Functions
 	
 	@objc func textFieldDidChange(_ textField: UITextField) {
 		if let name = nameTextField.text {
@@ -45,8 +46,7 @@ class AddNameViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
-	
-	// MARK: segue
+	// MARK: - Segue Functions
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "create_new_scene_segue") {
