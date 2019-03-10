@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		16290151200ED57B00289165 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16290150200ED57B00289165 /* AppDelegate.swift */; };
+		16290153200ED57B00289165 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 16290152200ED57B00289165 /* art.scnassets */; };
+		16290158200ED57B00289165 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16290156200ED57B00289165 /* Main.storyboard */; };
+		1629015A200ED57B00289165 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16290159200ED57B00289165 /* Assets.xcassets */; };
+		162F04412014ADB200D12F50 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162F043D2014ADB100D12F50 /* SCNVector3+Extensions.swift */; };
+		162F04422014ADB200D12F50 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162F043E2014ADB200D12F50 /* UIView+Extensions.swift */; };
+		162F04432014ADB200D12F50 /* ARHitTestResult+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162F043F2014ADB200D12F50 /* ARHitTestResult+Extensions.swift */; };
+		162F04442014ADB200D12F50 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162F04402014ADB200D12F50 /* Collection+Extensions.swift */; };
+		16515687201F904400C0D872 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16515686201F904400C0D872 /* VirtualObject.swift */; };
+		1651568B201F9FCD00C0D872 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1651568A201F9FCD00C0D872 /* Extensions.swift */; };
+		1651568F201FBDF600C0D872 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1651568E201FBDF600C0D872 /* Launch.storyboard */; };
+		16AFE131200F5F66009C8DEF /* RectangleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFE130200F5F66009C8DEF /* RectangleViewController.swift */; };
+		16AFE134200F5FEE009C8DEF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFE132200F5FEE009C8DEF /* Message.swift */; };
+		16AFE135200F5FEE009C8DEF /* PlaneRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFE133200F5FEE009C8DEF /* PlaneRectangle.swift */; };
+		16AFE157200F60FB009C8DEF /* RectangleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFE155200F60FB009C8DEF /* RectangleNode.swift */; };
+		16AFE158200F60FB009C8DEF /* SurfaceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFE156200F60FB009C8DEF /* SurfaceNode.swift */; };
+		16B3DF67203416F400474E61 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B3DF66203416F400474E61 /* Step.swift */; };
+		16CC8161202A78E8007FE2F5 /* CreateSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CC8160202A78E8007FE2F5 /* CreateSceneViewController.swift */; };
+		16D8FCFE2021DC6A004FF872 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16D8FCFD2021DC6A004FF872 /* GoogleService-Info.plist */; };
+		16F6200A20188DF700CC7900 /* SceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6200920188DF700CC7900 /* SceneCell.swift */; };
+		16F6200C20188E1C00CC7900 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6200B20188E1C00CC7900 /* Scene.swift */; };
+		16F6200E2018C42E00CC7900 /* AddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6200D2018C42E00CC7900 /* AddNameViewController.swift */; };
+		16FF209A2017EB6900461DF1 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FF20992017EB6900461DF1 /* MainTableViewController.swift */; };
+		821C274D934FC15434C26061 /* Pods_The_Real_AR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36DF1A00AAE04EAC4CFAE868 /* Pods_The_Real_AR.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1629014D200ED57B00289165 /* The Real AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Real AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16290150200ED57B00289165 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		16290152200ED57B00289165 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		16290157200ED57B00289165 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		16290159200ED57B00289165 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1629015E200ED57B00289165 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		162F043D2014ADB100D12F50 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
+		162F043E2014ADB200D12F50 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		162F043F2014ADB200D12F50 /* ARHitTestResult+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARHitTestResult+Extensions.swift"; sourceTree = "<group>"; };
+		162F04402014ADB200D12F50 /* Collection+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
+		16515686201F904400C0D872 /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
+		1651568A201F9FCD00C0D872 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1651568E201FBDF600C0D872 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		16AFE130200F5F66009C8DEF /* RectangleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleViewController.swift; sourceTree = "<group>"; };
+		16AFE132200F5FEE009C8DEF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		16AFE133200F5FEE009C8DEF /* PlaneRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneRectangle.swift; sourceTree = "<group>"; };
+		16AFE155200F60FB009C8DEF /* RectangleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleNode.swift; sourceTree = "<group>"; };
+		16AFE156200F60FB009C8DEF /* SurfaceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurfaceNode.swift; sourceTree = "<group>"; };
+		16B3DF66203416F400474E61 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		16BB47D42096C94B003712CF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		16CC8160202A78E8007FE2F5 /* CreateSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSceneViewController.swift; sourceTree = "<group>"; };
+		16D8FCFD2021DC6A004FF872 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16F6200920188DF700CC7900 /* SceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCell.swift; sourceTree = "<group>"; };
+		16F6200B20188E1C00CC7900 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		16F6200D2018C42E00CC7900 /* AddNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNameViewController.swift; sourceTree = "<group>"; };
+		16FF20992017EB6900461DF1 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		36DF1A00AAE04EAC4CFAE868 /* Pods_The_Real_AR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_The_Real_AR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83F537A7DFCBFF855296AFE7 /* Pods-The Real AR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Real AR.release.xcconfig"; path = "Pods/Target Support Files/Pods-The Real AR/Pods-The Real AR.release.xcconfig"; sourceTree = "<group>"; };
+		ECBA6E39120B260DBAEFCA48 /* Pods-The Real AR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Real AR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-The Real AR/Pods-The Real AR.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1629014A200ED57B00289165 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				821C274D934FC15434C26061 /* Pods_The_Real_AR.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		067AD57D9E96E3949B3C317F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ECBA6E39120B260DBAEFCA48 /* Pods-The Real AR.debug.xcconfig */,
+				83F537A7DFCBFF855296AFE7 /* Pods-The Real AR.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		16290144200ED57B00289165 = {
+			isa = PBXGroup;
+			children = (
+				1629014F200ED57B00289165 /* The Real AR */,
+				1629014E200ED57B00289165 /* Products */,
+				067AD57D9E96E3949B3C317F /* Pods */,
+				C2EB84419E59D6D679E80900 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1629014E200ED57B00289165 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1629014D200ED57B00289165 /* The Real AR.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1629014F200ED57B00289165 /* The Real AR */ = {
+			isa = PBXGroup;
+			children = (
+				16BB47D42096C94B003712CF /* README.md */,
+				16515685201F902800C0D872 /* Modal */,
+				1651568C201FA1AE00C0D872 /* View */,
+				1651568D201FA1B300C0D872 /* Controller */,
+				16515689201F9FB900C0D872 /* Utility */,
+				16515688201F91BC00C0D872 /* Supporting Files */,
+				16C86623202CAB08005FEBE1 /* Library */,
+			);
+			path = "The Real AR";
+			sourceTree = "<group>";
+		};
+		162F04452014ADBB00D12F50 /* Extensions + Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				162F043F2014ADB200D12F50 /* ARHitTestResult+Extensions.swift */,
+				162F04402014ADB200D12F50 /* Collection+Extensions.swift */,
+				162F043D2014ADB100D12F50 /* SCNVector3+Extensions.swift */,
+				162F043E2014ADB200D12F50 /* UIView+Extensions.swift */,
+			);
+			path = "Extensions + Utilities";
+			sourceTree = "<group>";
+		};
+		16515685201F902800C0D872 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				16F6200B20188E1C00CC7900 /* Scene.swift */,
+				16B3DF66203416F400474E61 /* Step.swift */,
+				16515686201F904400C0D872 /* VirtualObject.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		16515688201F91BC00C0D872 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				16290150200ED57B00289165 /* AppDelegate.swift */,
+				16290159200ED57B00289165 /* Assets.xcassets */,
+				16290152200ED57B00289165 /* art.scnassets */,
+				1651568E201FBDF600C0D872 /* Launch.storyboard */,
+				1629015E200ED57B00289165 /* Info.plist */,
+				16D8FCFD2021DC6A004FF872 /* GoogleService-Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		16515689201F9FB900C0D872 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1651568A201F9FCD00C0D872 /* Extensions.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		1651568C201FA1AE00C0D872 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				16290156200ED57B00289165 /* Main.storyboard */,
+				16F6200920188DF700CC7900 /* SceneCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1651568D201FA1B300C0D872 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				16FF20992017EB6900461DF1 /* MainTableViewController.swift */,
+				16F6200D2018C42E00CC7900 /* AddNameViewController.swift */,
+				16CC8160202A78E8007FE2F5 /* CreateSceneViewController.swift */,
+				16AFE130200F5F66009C8DEF /* RectangleViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		16AFE159200F60FF009C8DEF /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				16AFE155200F60FB009C8DEF /* RectangleNode.swift */,
+				16AFE156200F60FB009C8DEF /* SurfaceNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		16C86623202CAB08005FEBE1 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				16AFE159200F60FF009C8DEF /* Nodes */,
+				162F04452014ADBB00D12F50 /* Extensions + Utilities */,
+				16AFE133200F5FEE009C8DEF /* PlaneRectangle.swift */,
+				16AFE132200F5FEE009C8DEF /* Message.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		C2EB84419E59D6D679E80900 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				36DF1A00AAE04EAC4CFAE868 /* Pods_The_Real_AR.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1629014C200ED57B00289165 /* The Real AR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16290161200ED57B00289165 /* Build configuration list for PBXNativeTarget "The Real AR" */;
+			buildPhases = (
+				1CD9D235D5ED23A05F4A65E6 /* [CP] Check Pods Manifest.lock */,
+				16290149200ED57B00289165 /* Sources */,
+				1629014A200ED57B00289165 /* Frameworks */,
+				1629014B200ED57B00289165 /* Resources */,
+				73C09125DEC1A974CF390DF3 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "The Real AR";
+			productName = "The Real AR";
+			productReference = 1629014D200ED57B00289165 /* The Real AR.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		16290145200ED57B00289165 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "Berat Baran Cevik";
+				TargetAttributes = {
+					1629014C200ED57B00289165 = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1020;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 16290148200ED57B00289165 /* Build configuration list for PBXProject "The Real AR" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 16290144200ED57B00289165;
+			productRefGroup = 1629014E200ED57B00289165 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1629014C200ED57B00289165 /* The Real AR */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1629014B200ED57B00289165 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16290153200ED57B00289165 /* art.scnassets in Resources */,
+				1629015A200ED57B00289165 /* Assets.xcassets in Resources */,
+				16D8FCFE2021DC6A004FF872 /* GoogleService-Info.plist in Resources */,
+				16290158200ED57B00289165 /* Main.storyboard in Resources */,
+				1651568F201FBDF600C0D872 /* Launch.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1CD9D235D5ED23A05F4A65E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-The Real AR-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73C09125DEC1A974CF390DF3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-The Real AR/Pods-The Real AR-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-The Real AR/Pods-The Real AR-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		16290149200ED57B00289165 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16AFE131200F5F66009C8DEF /* RectangleViewController.swift in Sources */,
+				1651568B201F9FCD00C0D872 /* Extensions.swift in Sources */,
+				16F6200C20188E1C00CC7900 /* Scene.swift in Sources */,
+				16CC8161202A78E8007FE2F5 /* CreateSceneViewController.swift in Sources */,
+				16FF209A2017EB6900461DF1 /* MainTableViewController.swift in Sources */,
+				162F04412014ADB200D12F50 /* SCNVector3+Extensions.swift in Sources */,
+				162F04422014ADB200D12F50 /* UIView+Extensions.swift in Sources */,
+				16AFE157200F60FB009C8DEF /* RectangleNode.swift in Sources */,
+				16F6200A20188DF700CC7900 /* SceneCell.swift in Sources */,
+				16515687201F904400C0D872 /* VirtualObject.swift in Sources */,
+				162F04442014ADB200D12F50 /* Collection+Extensions.swift in Sources */,
+				16AFE135200F5FEE009C8DEF /* PlaneRectangle.swift in Sources */,
+				162F04432014ADB200D12F50 /* ARHitTestResult+Extensions.swift in Sources */,
+				16AFE134200F5FEE009C8DEF /* Message.swift in Sources */,
+				16290151200ED57B00289165 /* AppDelegate.swift in Sources */,
+				16B3DF67203416F400474E61 /* Step.swift in Sources */,
+				16AFE158200F60FB009C8DEF /* SurfaceNode.swift in Sources */,
+				16F6200E2018C42E00CC7900 /* AddNameViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		16290156200ED57B00289165 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				16290157200ED57B00289165 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1629015F200ED57B00289165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		16290160200ED57B00289165 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		16290162200ED57B00289165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECBA6E39120B260DBAEFCA48 /* Pods-The Real AR.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8SWNKP2F4V;
+				INFOPLIST_FILE = "$(SRCROOT)/The Real AR/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bbc.the.real.ar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		16290163200ED57B00289165 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83F537A7DFCBFF855296AFE7 /* Pods-The Real AR.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8SWNKP2F4V;
+				INFOPLIST_FILE = "$(SRCROOT)/The Real AR/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bbc.the.real.ar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16290148200ED57B00289165 /* Build configuration list for PBXProject "The Real AR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1629015F200ED57B00289165 /* Debug */,
+				16290160200ED57B00289165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16290161200ED57B00289165 /* Build configuration list for PBXNativeTarget "The Real AR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16290162200ED57B00289165 /* Debug */,
+				16290163200ED57B00289165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 16290145200ED57B00289165 /* Project object */;
+}

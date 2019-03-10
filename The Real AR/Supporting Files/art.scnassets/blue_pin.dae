@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+ <asset>
+  <contributor>
+   <authoring_tool>SceneKit Collada Exporter v1.0</authoring_tool>
+  </contributor>
+  <created>2018-01-17T01:41:13Z</created>
+  <modified>2018-01-17T01:41:13Z</modified>
+  <unit meter="0.010000"/>
+  <up_axis>Y_UP</up_axis>
+ </asset>
+ <library_materials>
+  <material id="material1">
+   <instance_effect url="#effect_material1"/>
+  </material>
+ </library_materials>
+ <library_effects>
+  <effect id="effect_material1">
+   <profile_COMMON>
+    <technique sid="common">
+     <blinn>
+      <ambient>
+       <color>0.484529 0.484529 0.484529 1</color>
+      </ambient>
+      <diffuse>
+       <color>0 0.589801 1 1</color>
+      </diffuse>
+      <specular>
+       <color>0 0 0 1</color>
+      </specular>
+      <shininess>
+       <float>0.022516</float>
+      </shininess>
+      <reflective>
+       <color>0 0 0 1</color>
+      </reflective>
+      <transparent opaque="A_ONE">
+       <color>1 1 1 1</color>
+      </transparent>
+      <transparency>
+       <float>1</float>
+      </transparency>
+      <index_of_refraction>
+       <float>1</float>
+      </index_of_refraction>
+     </blinn>
+    </technique>
+   </profile_COMMON>
+   <extra>
+    <technique profile="SceneKit">
+     <litPerPixel>1</litPerPixel>
+     <ambient_diffuse_lock>1</ambient_diffuse_lock>
+    </technique>
+   </extra>
+  </effect>
+ </library_effects>
+ <library_geometries>
+  <geometry id="geometry2">
+   <mesh>
+    <source id="geometrySource3">
+     <float_array id="ID4-array" count="72">-0.01 -0.075 0.01 -0.01 0.075 0.01 0.01 -0.075 0.01 0.01 0.075 0.01 0.01 -0.075 0.01 0.01 0.075 0.01 0.01 -0.075 -0.01 0.01 0.075 -0.01 0.01 -0.075 -0.01 0.01 0.075 -0.01 -0.01 -0.075 -0.01 -0.01 0.075 -0.01 -0.01 -0.075 -0.01 -0.01 0.075 -0.01 -0.01 -0.075 0.01 -0.01 0.075 0.01 -0.01 0.075 0.01 -0.01 0.075 -0.01 0.01 0.075 0.01 0.01 0.075 -0.01 -0.01 -0.075 -0.01 -0.01 -0.075 0.00999999 0.01 -0.075 -0.01 0.01 -0.075 0.00999999 </float_array>
+     <technique_common>
+      <accessor source="#ID4-array" count="24" stride="3">
+       <param name="X" type="float"/>
+       <param name="Y" type="float"/>
+       <param name="Z" type="float"/>
+      </accessor>
+     </technique_common>
+    </source>
+    <source id="geometrySource5">
+     <float_array id="ID6-array" count="72">0 0 1 0 0 1 0 0 1 0 0 1 1 0 -4.37114e-08 1 0 -4.37114e-08 1 0 -4.37114e-08 1 0 -4.37114e-08 -8.74228e-08 0 -1 -8.74228e-08 0 -1 -8.74228e-08 0 -1 -8.74228e-08 0 -1 -1 0 1.19249e-08 -1 0 1.19249e-08 -1 0 1.19249e-08 -1 0 1.19249e-08 0 1 -4.37114e-08 0 1 -4.37114e-08 0 1 -4.37114e-08 0 1 -4.37114e-08 0 -1 -4.37114e-08 0 -1 -4.37114e-08 0 -1 -4.37114e-08 0 -1 -4.37114e-08 </float_array>
+     <technique_common>
+      <accessor source="#ID6-array" count="24" stride="3">
+       <param name="X" type="float"/>
+       <param name="Y" type="float"/>
+       <param name="Z" type="float"/>
+      </accessor>
+     </technique_common>
+    </source>
+    <source id="geometrySource7">
+     <float_array id="ID8-array" count="48">0 0 0 1 1 0 1 1 0 0 0 1 1 0 1 1 0 0 0 1 1 0 1 1 0 0 0 1 1 0 1 1 0 0 0 1 1 0 1 1 0 0 0 1 1 0 1 1 </float_array>
+     <technique_common>
+      <accessor source="#ID8-array" count="24" stride="2">
+       <param name="S" type="float"/>
+       <param name="T" type="float"/>
+      </accessor>
+     </technique_common>
+    </source>
+    <vertices id="geometrySource3-vertices">
+     <input semantic="POSITION" source="#geometrySource3"/>
+     <input semantic="NORMAL" source="#geometrySource5"/>
+    </vertices>
+    <triangles count="12" material="geometryElement9">
+     <input semantic="VERTEX" offset="0" source="#geometrySource3-vertices"/>
+     <input semantic="NORMAL" offset="0" source="#geometrySource5"/>
+     <input semantic="TEXCOORD" offset="0" source="#geometrySource7" set="1"/>
+     <p>0 3 1 0 2 3 4 7 5 4 6 7 8 11 9 8 10 11 12 15 13 12 14 15 16 19 17 16 18 19 20 23 21 20 22 23 </p>
+    </triangles>
+   </mesh>
+  </geometry>
+ </library_geometries>
+ <library_visual_scenes>
+  <visual_scene id="scene10">
+   <node id="pin" name="pin">
+    <matrix>0.9999999 0 0 0 0 1 0 0.075 0 0 0.9999999 0 0 0 0 1 </matrix>
+    <instance_geometry url="#geometry2">
+     <bind_material>
+      <technique_common>
+       <instance_material symbol="geometryElement9" target="#material1"/>
+      </technique_common>
+     </bind_material>
+    </instance_geometry>
+   </node>
+  </visual_scene>
+ </library_visual_scenes>
+ <scene>
+  <instance_visual_scene url="#scene10"/>
+ </scene>
+</COLLADA>
