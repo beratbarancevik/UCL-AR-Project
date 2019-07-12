@@ -6,11 +6,11 @@ class Scene {
     // MARK: - Variables
 	
 	var name: String
-	var steps: Array<Step>
+	var steps: [Step]
     
     // MARK: - Initialization
 	
-	init?(name: String, steps: Array<Step>) {
+	init?(name: String, steps: [Step]) {
 		self.name = name
 		self.steps = steps
 

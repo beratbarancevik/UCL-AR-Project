@@ -27,11 +27,11 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     
     var stepNumber = 1
     
-    var virtualObjects = Array<VirtualObject>()
+    var virtualObjects = [VirtualObject]()
     
     var objectToPlace: VirtualObjectType = .pin
     
-    var enteredTexts = Array<String>()
+    var enteredTexts = [String]()
     
     var enteredTextsIndexHolder = 0
     
@@ -65,7 +65,10 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     var showDebugOptions = false {
         didSet {
             if showDebugOptions {
-                sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+                sceneView.debugOptions = [
+                    ARSCNDebugOptions.showFeaturePoints,
+                    ARSCNDebugOptions.showWorldOrigin
+                ]
             } else {
                 sceneView.debugOptions = []
             }
@@ -98,9 +101,9 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         }
     }
     
-    var sceneCoordinates = Array<String>()
-    var stringCoordinates = Array<String>()
-    var floatCoordinates = Array<Float>()
+    var sceneCoordinates = [String]()
+    var stringCoordinates = [String]()
+    var floatCoordinates = [Float]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -206,7 +209,8 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     
     // MARK: - ARSessionDelegate
     
-    // Update selected rectangle if it's been more than 1 second and the screen is still being touched
+    // Update selected rectangle if it's been more than 1 second and the screen is still being
+    // touched
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         if searchingForRectangles {
             return
@@ -265,7 +269,8 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     
     // MARK: - Helper Methods
     
-    // Updates selectedRectangleObservation with the the rectangle found in the given ARFrame at the given location
+    // Updates selectedRectangleObservation with the the rectangle found in the given ARFrame at the
+    // given location
     private func findRectangle(locationInScene location: CGPoint, frame currentFrame: ARFrame) {
         // Note that we're actively searching for rectangles
         searchingForRectangles = true
@@ -281,8 +286,10 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
                     // Mark that we've finished searching for rectangles
                     self.searchingForRectangles = false
                     
-                    // Access the first result in the array after casting the array as a VNClassificationObservation array
-                    guard let observations = request.results as? [VNRectangleObservation], let _ = observations.first else {
+                    // Access the first result in the array after casting the array as a
+                    // VNClassificationObservation array
+                    guard let observations = request.results as? [VNRectangleObservation],
+                        let _ = observations.first else {
                         print ("No results")
                         self.message = .errNoRect
                         return
@@ -307,17 +314,27 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
                     }
                     
                     // Outline selected rectangle
-                    let points = [selectedRect.topLeft, selectedRect.topRight, selectedRect.bottomRight, selectedRect.bottomLeft]
-                    let convertedPoints = points.map { self.sceneView.convertFromCamera($0) }
-                    self.selectedRectangleOutlineLayer = self.drawPolygon(convertedPoints, color: UIColor.red)
+                    let points = [
+                        selectedRect.topLeft,
+                        selectedRect.topRight,
+                        selectedRect.bottomRight,
+                        selectedRect.bottomLeft
+                    ]
+                    let convertedPoints = points.map {
+                        self.sceneView.convertFromCamera($0)
+                    }
+                    self.selectedRectangleOutlineLayer = self.drawPolygon(
+                        convertedPoints,
+                        color: UIColor.red)
                     self.sceneView.layer.addSublayer(self.selectedRectangleOutlineLayer!)
                     
                     // Track the selected rectangle and when it was found
                     self.selectedRectangleObservation = selectedRect
                     self.selectedRectangleLastUpdated = Date()
                     
-                    // Check if the user stopped touching the screen while we were in the background.
-                    // If so, then we should add the planeRect here instead of waiting for touches to end.
+                    // Check if the user stopped touching the screen while we were in the background
+                    // If so, then we should add the planeRect here instead of waiting for touches
+                    // to end
                     if self.currTouchLocation == nil {
                         // Create a planeRect and add a RectangleNode
                         self.addPlaneRect(for: selectedRect)
@@ -329,7 +346,9 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             request.maximumObservations = 0
             
             // Perform request
-            let handler = VNImageRequestHandler(cvPixelBuffer: currentFrame.capturedImage, options: [:])
+            let handler = VNImageRequestHandler(
+                cvPixelBuffer: currentFrame.capturedImage,
+                options: [:])
             try? handler.perform([request])
         }
     }
@@ -355,11 +374,18 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     }
     
     private func addPin(for planeRectangle: PlaneRectangle) {
-        let position = SCNVector3Make(planeRectangle.position.x, planeRectangle.position.y, planeRectangle.position.z)
+        let position = SCNVector3Make(
+            planeRectangle.position.x,
+            planeRectangle.position.y,
+            planeRectangle.position.z)
         let pinNode = createGreenPinFromScene(position)!
         sceneView.scene.rootNode.addChildNode(pinNode)
         
-        referenceObject = VirtualObject(type: objectToPlace, xCoor: planeRectangle.position.x, yCoor: planeRectangle.position.y, zCoor: planeRectangle.position.z)
+        referenceObject = VirtualObject(
+            type: objectToPlace,
+            xCoor: planeRectangle.position.x,
+            yCoor: planeRectangle.position.y,
+            zCoor: planeRectangle.position.z)
     }
     
     private func createGreenPinFromScene(_ position: SCNVector3) -> SCNNode? {
@@ -537,8 +563,6 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         }
     }
     
-    
-    
     @IBAction func didTap(_ sender: UITapGestureRecognizer) {
         // Get tap location
         let tapLocation = sender.location(in: sceneView)
@@ -551,8 +575,7 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             placePin(result)
         } else {
             print("CANNOT PLACE PIN")
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { }
         }
     }
     
@@ -566,9 +589,14 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         let transform = result.worldTransform
         
         // Get position from transform (4th column of transformation matrix)
-        let planePosition = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+        let planePosition = SCNVector3Make(
+            transform.columns.3.x,
+            transform.columns.3.y,
+            transform.columns.3.z)
         
-        let pinNode = createObjectFromScene(planePosition)!
+        guard let pinNode = createObjectFromScene(planePosition) else {
+            return
+        }
         
         sceneView.scene.rootNode.addChildNode(pinNode)
         
@@ -647,7 +675,7 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         }
     }
     
-    var nodesArray = Array<SCNNode>()
+    var nodesArray = [SCNNode]()
     
     @IBAction func undoDidTap(_ sender: UIButton) {
         if !nodesArray.isEmpty {
@@ -746,7 +774,7 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             
             alert.setValue(controller, forKey: "contentViewController")
             
-            let height: NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.1, constant: self.view.frame.height * 0.4)
+            let height: NSLayoutConstraint = NSLayoutConstraint(item: alert.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.1, constant: self.view.frame.height * 0.4)
             alert.view.addConstraint(height)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in

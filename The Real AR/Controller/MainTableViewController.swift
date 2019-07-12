@@ -11,7 +11,7 @@ class MainTableViewController: UITableViewController {
     var ref: DatabaseReference!
     
     // store scenes
-    var scenes = Array<Scene>()
+    var scenes = [Scene]()
     
     // MARK: - View Controller Life Cycle Methods
     
@@ -55,7 +55,7 @@ class MainTableViewController: UITableViewController {
             
             // scenes loop
             for sceneItem in scenesDictionary {
-                var steps = Array<Step>()
+                var steps = [Step]()
                 guard let stepsDictionary = sceneItem.value as? NSDictionary else {
                     print("E2")
                     self.showError()
@@ -64,7 +64,7 @@ class MainTableViewController: UITableViewController {
                 
                 // steps loop
                 for stepItem in stepsDictionary {
-                    var virtualObjects = Array<VirtualObject>()
+                    var virtualObjects = [VirtualObject]()
                     guard let virtualObjectsDictionary = stepItem.value as? NSDictionary else {
                         print("E3")
                         self.showError()

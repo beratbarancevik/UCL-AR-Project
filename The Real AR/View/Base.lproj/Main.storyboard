@@ -167,31 +167,31 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BGS-l8-iFf">
-                                <rect key="frame" x="0.0" y="108" width="375" height="24"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="22"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6S0-IX-LJj">
-                                        <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="22"/>
                                         <state key="normal" image="home"/>
                                         <connections>
                                             <action selector="homeDidTap:" destination="1Fv-xV-fl0" eventType="touchUpInside" id="0jf-sL-Ewi"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfO-PO-0cd">
-                                        <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="24"/>
+                                        <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="22"/>
                                         <state key="normal" image="text"/>
                                         <connections>
                                             <action selector="textDidTap:" destination="1Fv-xV-fl0" eventType="touchUpInside" id="RZF-Ml-y9m"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idT-05-VwT">
-                                        <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="24"/>
+                                        <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="22"/>
                                         <state key="normal" image="previous"/>
                                         <connections>
                                             <action selector="backDidTap:" destination="1Fv-xV-fl0" eventType="touchUpInside" id="6g4-uh-WrZ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnC-FY-49R">
-                                        <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="24"/>
+                                        <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="22"/>
                                         <state key="normal" image="next"/>
                                         <connections>
                                             <action selector="nextDidTap:" destination="1Fv-xV-fl0" eventType="touchUpInside" id="J2W-bs-fIT"/>
@@ -262,38 +262,38 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </arscnView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XVf-k7-bmF">
-                                <rect key="frame" x="0.0" y="108" width="375" height="24"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="22"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSt-xW-lb3">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="22"/>
                                         <state key="normal" image="home"/>
                                         <connections>
                                             <action selector="homeDidTap:" destination="rEE-1V-bD1" eventType="touchUpInside" id="g1B-WH-TPS"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vRV-YW-GSP">
-                                        <rect key="frame" x="75" y="0.0" width="75" height="24"/>
+                                        <rect key="frame" x="75" y="0.0" width="75" height="22"/>
                                         <state key="normal" image="object"/>
                                         <connections>
                                             <action selector="objectDidTap:" destination="rEE-1V-bD1" eventType="touchUpInside" id="6L2-IN-XOp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibr-xu-Iyx">
-                                        <rect key="frame" x="150" y="0.0" width="75" height="24"/>
+                                        <rect key="frame" x="150" y="0.0" width="75" height="22"/>
                                         <state key="normal" image="undo"/>
                                         <connections>
                                             <action selector="undoDidTap:" destination="rEE-1V-bD1" eventType="touchUpInside" id="aL7-Bi-2Xu"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="opE-eb-bCz">
-                                        <rect key="frame" x="225" y="0.0" width="75" height="24"/>
+                                        <rect key="frame" x="225" y="0.0" width="75" height="22"/>
                                         <state key="normal" image="next"/>
                                         <connections>
                                             <action selector="nextDidTap:" destination="rEE-1V-bD1" eventType="touchUpInside" id="VUE-Lv-PTo"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hew-l9-7QW">
-                                        <rect key="frame" x="300" y="0.0" width="75" height="24"/>
+                                        <rect key="frame" x="300" y="0.0" width="75" height="22"/>
                                         <state key="normal" image="save"/>
                                         <connections>
                                             <action selector="saveDidTap:" destination="rEE-1V-bD1" eventType="touchUpInside" id="Yfd-U5-mWj"/>

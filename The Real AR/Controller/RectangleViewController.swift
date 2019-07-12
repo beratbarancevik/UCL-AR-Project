@@ -45,7 +45,10 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
     var showDebugOptions = false {
         didSet {
             if showDebugOptions {
-                sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+                sceneView.debugOptions = [
+                    ARSCNDebugOptions.showFeaturePoints,
+                    ARSCNDebugOptions.showWorldOrigin
+                ]
             } else {
                 sceneView.debugOptions = []
             }
@@ -126,7 +129,10 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
         
         // Show world origin and feature points if desired
         if showDebugOptions {
-            sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+            sceneView.debugOptions = [
+                ARSCNDebugOptions.showFeaturePoints,
+                ARSCNDebugOptions.showWorldOrigin
+            ]
         }
         
         // Enable default lighting
@@ -205,7 +211,8 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
     
     // MARK: - ARSessionDelegate
     
-    // Update selected rectangle if it's been more than 1 second and the screen is still being touched
+    // Update selected rectangle if it's been more than 1 second and the screen is still being
+    // touched
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         if searchingForRectangles {
             return
@@ -262,7 +269,8 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
     
     // MARK: - Helper Methods
     
-    // Updates selectedRectangleObservation with the the rectangle found in the given ARFrame at the given location
+    // Updates selectedRectangleObservation with the the rectangle found in the given ARFrame at the
+    // given location
     private func findRectangle(locationInScene location: CGPoint, frame currentFrame: ARFrame) {
         // Note that we're actively searching for rectangles
         searchingForRectangles = true
@@ -278,7 +286,8 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
                     // Mark that we've finished searching for rectangles
                     self.searchingForRectangles = false
                     
-                    // Access the first result in the array after casting the array as a VNClassificationObservation array
+                    // Access the first result in the array after casting the array as a
+                    // VNClassificationObservation array
                     guard let observations = request.results as? [VNRectangleObservation],
                         let _ = observations.first else {
                             print ("No results")
@@ -305,17 +314,25 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
                     }
                     
                     // Outline selected rectangle
-                    let points = [selectedRect.topLeft, selectedRect.topRight, selectedRect.bottomRight, selectedRect.bottomLeft]
+                    let points = [
+                        selectedRect.topLeft,
+                        selectedRect.topRight,
+                        selectedRect.bottomRight,
+                        selectedRect.bottomLeft
+                    ]
                     let convertedPoints = points.map { self.sceneView.convertFromCamera($0) }
-                    self.selectedRectangleOutlineLayer = self.drawPolygon(convertedPoints, color: UIColor.red)
+                    self.selectedRectangleOutlineLayer = self.drawPolygon(
+                        convertedPoints,
+                        color: UIColor.red)
                     self.sceneView.layer.addSublayer(self.selectedRectangleOutlineLayer!)
                     
                     // Track the selected rectangle and when it was found
                     self.selectedRectangleObservation = selectedRect
                     self.selectedRectangleLastUpdated = Date()
                     
-                    // Check if the user stopped touching the screen while we were in the background.
-                    // If so, then we should add the planeRect here instead of waiting for touches to end.
+                    // Check if the user stopped touching the screen while we were in the background
+                    // If so, then we should add the planeRect here instead of waiting for touches
+                    // to end.
                     if self.currTouchLocation == nil {
                         // Create a planeRect and add a RectangleNode
                         self.addPlaneRect(for: selectedRect)
@@ -327,7 +344,9 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
             request.maximumObservations = 0
             
             // Perform request
-            let handler = VNImageRequestHandler(cvPixelBuffer: currentFrame.capturedImage, options: [:])
+            let handler = VNImageRequestHandler(
+                cvPixelBuffer: currentFrame.capturedImage,
+                options: [:])
             try? handler.perform([request])
         }
     }
@@ -363,7 +382,11 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
             forwardButton.setImage(UIImage(named: "save"), for: .normal)
         }
         
-        referenceObject = VirtualObject(type: .pin, xCoor: planeRectangle.position.x, yCoor: planeRectangle.position.y, zCoor: planeRectangle.position.z)
+        referenceObject = VirtualObject(
+            type: .pin,
+            xCoor: planeRectangle.position.x,
+            yCoor: planeRectangle.position.y,
+            zCoor: planeRectangle.position.z)
         
         for step in (scene?.steps)! {
             
@@ -580,6 +603,10 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
         return layer
     }
     
+    
+    
+    
+    
     // MARK: - User Interaction Functions
     
     @IBAction func textDidTap(_ sender: Any) {
@@ -597,7 +624,14 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
         
         alert.setValue(controller, forKey: "contentViewController")
         
-        let height: NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.1, constant: self.view.frame.height * 0.4)
+        let height: NSLayoutConstraint = NSLayoutConstraint(
+            item: alert.view as Any,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 0.1,
+            constant: self.view.frame.height * 0.4)
         alert.view.addConstraint(height)
         
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

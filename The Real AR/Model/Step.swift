@@ -6,11 +6,11 @@ class Step {
     // MARK: - Variables
 	
 	var stepNumber: String
-	var virtualObjects: Array<VirtualObject>
+	var virtualObjects: [VirtualObject]
     
     // MARK: - Initialization
 	
-	init?(stepNumber: String, virtualObjects: Array<VirtualObject>) {
+	init?(stepNumber: String, virtualObjects: [VirtualObject]) {
 		self.stepNumber = stepNumber
 		self.virtualObjects = virtualObjects
 		
