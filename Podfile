@@ -1,16 +1,14 @@
-# Uncomment the next line to define a global platform for your project
 platform :ios, '12.2'
 
 target 'The Real AR' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for The Real AR
-  pod 'SwiftMessages'
+  pod 'SwiftMessages', '8.0.3'
 
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Database'
-  pod 'Firebase/Performance'
-  pod 'Firebase/Storage'
+  pod 'Firebase/Analytics', '7.3.0'
+  pod 'Firebase/Database', '7.3.0'
+  pod 'Firebase/Performance', '7.3.0'
+  pod 'Firebase/Storage', '7.3.0'
 
 end
