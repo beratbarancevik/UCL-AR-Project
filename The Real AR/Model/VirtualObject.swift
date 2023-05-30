@@ -1,7 +1,4 @@
-
-import Foundation
-
-class VirtualObject {
+final class VirtualObject {
     
     // MARK: - Variables
 	

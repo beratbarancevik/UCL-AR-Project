@@ -1,10 +1,8 @@
-
-import Foundation
 import UIKit
 
 extension UIView {
     
-    // MARK: - Camera-Geometry Functions
+    // MARK: - Camera-Geometry
     
     // Converts a point from camera coordinates (0 to 1 or -1 to 0, depending on orientation)
     // into a point within the given view

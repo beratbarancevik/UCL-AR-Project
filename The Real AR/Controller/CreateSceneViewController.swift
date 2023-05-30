@@ -1,19 +1,18 @@
-
-import UIKit
-import SceneKit
 import ARKit
-import Vision
 import FirebaseDatabase
+import SceneKit
+import UIKit
+import Vision
 
-class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
-    // MARK: - UI Variables
+    // MARK: - UI Properties
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messageView: UIView!
     
-    // MARK: - Variables
+    // MARK: - Properties
     
     var sceneName: String?
     
@@ -93,13 +92,9 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         }
     }
     
-    // MARK: - View Controller Life Cycle Methods
+    // MARK: - Lifecycle
     
-    override var prefersStatusBarHidden: Bool {
-        get {
-            return true
-        }
-    }
+    override var prefersStatusBarHidden: Bool { true }
     
     var sceneCoordinates = [String]()
     var stringCoordinates = [String]()
@@ -127,7 +122,7 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
         
         // create a session configuration
         let configuration = ARWorldTrackingConfiguration()
@@ -144,7 +139,7 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
         
         // pause the view's session
         sceneView.session.pause()
@@ -777,7 +772,7 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             let height: NSLayoutConstraint = NSLayoutConstraint(item: alert.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.1, constant: self.view.frame.height * 0.4)
             alert.view.addConstraint(height)
             
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 guard let enteredText = textView.text else {
                     return
                 }
@@ -786,18 +781,18 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
                 self.enteredTexts.append(enteredText)
             }))
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             
-            self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true)
             
             
             textView.becomeFirstResponder()
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alertController, animated: true, completion: nil)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alertController, animated: true)
     }
     
     @IBAction func homeDidTap(_ sender: UIButton) {
-        self.navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
 }

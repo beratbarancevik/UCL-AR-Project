@@ -1,9 +1,8 @@
-
 import ARKit
 
 extension SCNVector3 {
     
-    // MARK: - Geometry Functions
+    // MARK: - Geometry
     
     func distance(from vector: SCNVector3) -> CGFloat {
         let deltaX = self.x - vector.x

@@ -1,11 +1,10 @@
-
-import UIKit
 import FirebaseDatabase
 import SwiftMessages
+import UIKit
 
-class MainTableViewController: UITableViewController {
+final class MainTableViewController: UITableViewController {
     
-    // MARK: - Variables
+    // MARK: - Properties
     
     // firebase db reference
     var ref: DatabaseReference!
@@ -13,7 +12,7 @@ class MainTableViewController: UITableViewController {
     // store scenes
     var scenes = [Scene]()
     
-    // MARK: - View Controller Life Cycle Methods
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,7 @@ class MainTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
         setNeedsStatusBarAppearanceUpdate()
         
         // clean scenes array
@@ -40,7 +39,7 @@ class MainTableViewController: UITableViewController {
         SwiftMessages.hideAll()
     }
     
-    // MARK: - Data Functions
+    // MARK: - Data
     
     // get all scenes from Firebase
     func getAllScenes() {
@@ -154,7 +153,10 @@ class MainTableViewController: UITableViewController {
                 self.scenes.append(scene)
             }
             self.tableView.reloadData()
-        }) { (error) in self.showError(); print("Firebase error: \(error.localizedDescription)") }
+        }) { error in
+            self.showError()
+            print("Firebase error: \(error.localizedDescription)")
+        }
     }
     
     func generateType(from integer: Int) -> VirtualObjectType {
@@ -184,20 +186,16 @@ class MainTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Table View Controller Methods
+    // MARK: - TableView
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    override func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scenes.count
-    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { scenes.count }
     
     override func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
-        ) -> UITableViewCell {
+    ) -> UITableViewCell {
         let cellIdentifier = "cell"
         let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
@@ -206,16 +204,15 @@ class MainTableViewController: UITableViewController {
         return cell
     }
     
-    // MARK: - Segue Functions
+    // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "rectangle_segue") {
-            if let destinationViewController = segue.destination as? RectangleViewController {
-                if let selectedItemIndex = tableView.indexPathForSelectedRow {
-                    destinationViewController.scene = scenes[selectedItemIndex.row]
-                    destinationViewController.index = selectedItemIndex.row
-                }
-            }
+        if (segue.identifier == "rectangle_segue"),
+           let destinationViewController = segue.destination as? RectangleViewController,
+           let selectedItemIndex = tableView.indexPathForSelectedRow {
+            destinationViewController.scene = scenes[selectedItemIndex.row]
+            destinationViewController.index = selectedItemIndex.row
+
         }
     }
 }

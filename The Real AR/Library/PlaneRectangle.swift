@@ -1,5 +1,3 @@
-
-import Foundation
 import ARKit
 import Vision
 
@@ -56,7 +54,7 @@ fileprivate enum RectangleCorners {
     case bottomRight(topRight: SCNVector3, bottomLeft: SCNVector3, bottomRight: SCNVector3)
 }
 
-// MARK: - Geometry Functions
+// MARK: - Geometry
 
 // Finds 3d vector points for the corners of a rectangle on a plane in a given scene
 // Returns 3 corners representing the rectangle as well as the anchor for its plane

@@ -1,5 +1,4 @@
-
-class Scene {
+final class Scene {
 	var name: String
 	var steps: [Step]
     

@@ -1,7 +1,4 @@
-
-import Foundation
-
-class Step {
+final class Step {
     
     // MARK: - Variables
 	

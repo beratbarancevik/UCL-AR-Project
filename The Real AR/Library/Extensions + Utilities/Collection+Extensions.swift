@@ -1,7 +1,5 @@
 
-import Foundation
-
-// MARK: - Helper Function
+// MARK: - Helper
 
 // Filters the given collections to their interesection where comparator returns that the values are
 // the same

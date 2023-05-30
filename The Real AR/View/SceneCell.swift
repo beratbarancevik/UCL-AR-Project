@@ -1,7 +1,6 @@
-
 import UIKit
 
-class SceneCell: UITableViewCell {
+final class SceneCell: UITableViewCell {
     
     // MARK: - UI Variables
     
@@ -15,10 +14,10 @@ class SceneCell: UITableViewCell {
 		}
 	}
     
-    // MARK: - UI Manipulation Functions
+    // MARK: - UI Manipulation
 	
 	func updateUI() {
-		if let scene = self.scene {
+		if let scene {
 			sceneNameLabel.text = scene.name
 		}
 	}

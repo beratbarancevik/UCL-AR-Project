@@ -1,10 +1,9 @@
-
-import UIKit
-import SceneKit
 import ARKit
+import SceneKit
+import UIKit
 import Vision
 
-class RectangleNode: SCNNode {
+final class RectangleNode: SCNNode {
     
     // MARK: - Constants
     

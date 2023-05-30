@@ -1,12 +1,11 @@
-
-import UIKit
-import SceneKit
 import ARKit
+import SceneKit
+import UIKit
 import Vision
 
-class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+final class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
-    // MARK: - UI Variables
+    // MARK: - UI Properties
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var messageLabel: UILabel!
@@ -75,11 +74,7 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
     
     // MARK: - View Controller Life Cycle Methods
     
-    override var prefersStatusBarHidden: Bool {
-        get {
-            return true
-        }
-    }
+    override var prefersStatusBarHidden: Bool { true }
     
     var isReferenceSet = false
     
@@ -148,7 +143,7 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
@@ -165,7 +160,7 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
         
         // Pause the view's session
         sceneView.session.pause()
@@ -603,11 +598,7 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
         return layer
     }
     
-    
-    
-    
-    
-    // MARK: - User Interaction Functions
+    // MARK: - User Interaction
     
     @IBAction func textDidTap(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
@@ -624,7 +615,7 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
         
         alert.setValue(controller, forKey: "contentViewController")
         
-        let height: NSLayoutConstraint = NSLayoutConstraint(
+        let height = NSLayoutConstraint(
             item: alert.view as Any,
             attribute: .height,
             relatedBy: .equal,
@@ -634,9 +625,9 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
             constant: self.view.frame.height * 0.4)
         alert.view.addConstraint(height)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true)
     }
     
     var nodesArray = Array<SCNNode>()
@@ -734,6 +725,6 @@ class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSessionDel
     }
     
     @IBAction func homeDidTap(_ sender: UIButton) {
-        self.navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
 }
