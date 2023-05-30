@@ -3,7 +3,7 @@ import UIKit
 import SceneKit
 import ARKit
 import Vision
-import Firebase
+import FirebaseDatabase
 
 class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     

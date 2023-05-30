@@ -31,6 +31,10 @@
 		16F6200E2018C42E00CC7900 /* AddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6200D2018C42E00CC7900 /* AddNameViewController.swift */; };
 		16FF209A2017EB6900461DF1 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FF20992017EB6900461DF1 /* MainTableViewController.swift */; };
 		1D2F20521A153B5643563482 /* Pods_The_Real_AR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2059491EF8D735E1AE7AE9C /* Pods_The_Real_AR.framework */; };
+		F406B96D2A2654220083F232 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F406B96C2A2654220083F232 /* FirebaseAnalytics */; };
+		F406B96F2A2654220083F232 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = F406B96E2A2654220083F232 /* FirebaseDatabase */; };
+		F406B9712A2654220083F232 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = F406B9702A2654220083F232 /* FirebasePerformance */; };
+		F406B9732A2654220083F232 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F406B9722A2654220083F232 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +74,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F406B96F2A2654220083F232 /* FirebaseDatabase in Frameworks */,
+				F406B96D2A2654220083F232 /* FirebaseAnalytics in Frameworks */,
+				F406B9712A2654220083F232 /* FirebasePerformance in Frameworks */,
+				F406B9732A2654220083F232 /* FirebaseStorage in Frameworks */,
 				1D2F20521A153B5643563482 /* Pods_The_Real_AR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +226,12 @@
 			dependencies = (
 			);
 			name = "The Real AR";
+			packageProductDependencies = (
+				F406B96C2A2654220083F232 /* FirebaseAnalytics */,
+				F406B96E2A2654220083F232 /* FirebaseDatabase */,
+				F406B9702A2654220083F232 /* FirebasePerformance */,
+				F406B9722A2654220083F232 /* FirebaseStorage */,
+			);
 			productName = "The Real AR";
 			productReference = 1629014D200ED57B00289165 /* The Real AR.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +263,9 @@
 				Base,
 			);
 			mainGroup = 16290144200ED57B00289165;
+			packageReferences = (
+				F406B96B2A2654220083F232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 1629014E200ED57B00289165 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -533,6 +550,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F406B96B2A2654220083F232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 10.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F406B96C2A2654220083F232 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F406B96B2A2654220083F232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F406B96E2A2654220083F232 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F406B96B2A2654220083F232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		F406B9702A2654220083F232 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F406B96B2A2654220083F232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+		F406B9722A2654220083F232 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F406B96B2A2654220083F232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 16290145200ED57B00289165 /* Project object */;
 }
