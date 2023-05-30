@@ -632,11 +632,11 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
                 let typeInt = typeGenerator(from: virtualObject.type)
                 
                 if typeInt != 10 {
-                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor]) { (error, ref) in
+                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor] as [String : Any]) { (error, ref) in
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                 } else {
-                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor, "text": enteredTexts[enteredTextsIndexHolder]]) { (error, ref) in
+                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor, "text": enteredTexts[enteredTextsIndexHolder]] as [String : Any]) { (error, ref) in
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                     
@@ -699,11 +699,11 @@ class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionD
                 let typeInt = typeGenerator(from: virtualObject.type)
                 
                 if typeInt != 10 {
-                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor]) { (error, ref) in
+                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor] as [String : Any]) { (error, ref) in
                         
                     }
                 } else {
-                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor, "text": enteredTexts[enteredTextsIndexHolder]]) { (error, ref) in
+                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor, "text": enteredTexts[enteredTextsIndexHolder]] as [String : Any]) { (error, ref) in
                         
                     }
                     

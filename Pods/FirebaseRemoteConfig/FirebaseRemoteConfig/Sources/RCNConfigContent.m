@@ -16,13 +16,14 @@
 
 #import "FirebaseRemoteConfig/Sources/RCNConfigContent.h"
 
+#import "FirebaseRemoteConfig/Sources/Private/FIRRemoteConfig_Private.h"
 #import "FirebaseRemoteConfig/Sources/Public/FirebaseRemoteConfig/FIRRemoteConfig.h"
 #import "FirebaseRemoteConfig/Sources/RCNConfigConstants.h"
 #import "FirebaseRemoteConfig/Sources/RCNConfigDBManager.h"
 #import "FirebaseRemoteConfig/Sources/RCNConfigDefines.h"
 #import "FirebaseRemoteConfig/Sources/RCNConfigValue_Internal.h"
 
-#import "FirebaseCore/Sources/Private/FirebaseCoreInternal.h"
+#import "FirebaseCore/Extension/FirebaseCoreInternal.h"
 
 @implementation RCNConfigContent {
   /// Active config data that is currently used.
@@ -41,10 +42,10 @@
   RCNConfigDBManager *_DBManager;
   /// Current bundle identifier;
   NSString *_bundleIdentifier;
-  /// Dispatch semaphore to block all config reads until we have read from the database. This only
+  /// Blocks all config reads until we have read from the database. This only
   /// potentially blocks on the first read. Should be a no-wait for all subsequent reads once we
   /// have data read into memory from the database.
-  dispatch_semaphore_t _configLoadFromDBSemaphore;
+  dispatch_group_t _dispatch_group;
   /// Boolean indicating if initial DB load of fetched,active and default config has succeeded.
   BOOL _isConfigLoadFromDBCompleted;
   /// Boolean indicating that the load from database has initiated at least once.
@@ -52,7 +53,7 @@
 }
 
 /// Default timeout when waiting to read data from database.
-static const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
+const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
 
 /// Singleton instance of RCNConfigContent.
 + (instancetype)sharedInstance {
@@ -87,7 +88,7 @@ static const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
     }
     _DBManager = DBManager;
     // Waits for both config and Personalization data to load.
-    _configLoadFromDBSemaphore = dispatch_semaphore_create(1);
+    _dispatch_group = dispatch_group_create();
     [self loadConfigFromMainTable];
   }
   return self;
@@ -113,6 +114,7 @@ static const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
   NSAssert(!_isDatabaseLoadAlreadyInitiated, @"Database load has already been initiated");
   _isDatabaseLoadAlreadyInitiated = true;
 
+  dispatch_group_enter(_dispatch_group);
   [_DBManager
       loadMainWithBundleIdentifier:_bundleIdentifier
                  completionHandler:^(BOOL success, NSDictionary *fetchedConfig,
@@ -120,15 +122,17 @@ static const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
                    self->_fetchedConfig = [fetchedConfig mutableCopy];
                    self->_activeConfig = [activeConfig mutableCopy];
                    self->_defaultConfig = [defaultConfig mutableCopy];
-                   dispatch_semaphore_signal(self->_configLoadFromDBSemaphore);
+                   dispatch_group_leave(self->_dispatch_group);
                  }];
 
+  // TODO(karenzeng): Refactor personalization to be returned in loadMainWithBundleIdentifier above
+  dispatch_group_enter(_dispatch_group);
   [_DBManager loadPersonalizationWithCompletionHandler:^(
                   BOOL success, NSDictionary *fetchedPersonalization,
                   NSDictionary *activePersonalization, NSDictionary *defaultConfig) {
     self->_fetchedPersonalization = [fetchedPersonalization copy];
     self->_activePersonalization = [activePersonalization copy];
-    dispatch_semaphore_signal(self->_configLoadFromDBSemaphore);
+    dispatch_group_leave(self->_dispatch_group);
   }];
 }
 
@@ -198,6 +202,20 @@ static const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSString *strValue = [dateFormatter stringFromDate:(NSDate *)value];
         valueData = [(NSString *)strValue dataUsingEncoding:NSUTF8StringEncoding];
+      } else if ([value isKindOfClass:[NSArray class]]) {
+        NSError *error;
+        valueData = [NSJSONSerialization dataWithJSONObject:value options:0 error:&error];
+        if (error) {
+          FIRLogError(kFIRLoggerRemoteConfig, @"I-RCN000076", @"Invalid array value for key '%@'",
+                      key);
+        }
+      } else if ([value isKindOfClass:[NSDictionary class]]) {
+        NSError *error;
+        valueData = [NSJSONSerialization dataWithJSONObject:value options:0 error:&error];
+        if (error) {
+          FIRLogError(kFIRLoggerRemoteConfig, @"I-RCN000077",
+                      @"Invalid dictionary value for key '%@'", key);
+        }
       } else {
         continue;
       }
@@ -346,6 +364,11 @@ static const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
   return _defaultConfig;
 }
 
+- (NSDictionary *)activePersonalization {
+  [self checkAndWaitForInitialDatabaseLoad];
+  return _activePersonalization;
+}
+
 - (NSDictionary *)getConfigAndMetadataForNamespace:(NSString *)FIRNamespace {
   /// If this is the first time reading the active metadata, we might still be reading it from the
   /// database.
@@ -360,12 +383,12 @@ static const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
 /// configs until load is done.
 /// @return Database load completion status.
 - (BOOL)checkAndWaitForInitialDatabaseLoad {
-  /// Wait on semaphore until done. This should be a no-op for subsequent calls.
+  /// Wait until load is done. This should be a no-op for subsequent calls.
   if (!_isConfigLoadFromDBCompleted) {
-    long result = dispatch_semaphore_wait(
-        _configLoadFromDBSemaphore,
+    intptr_t isErrorOrTimeout = dispatch_group_wait(
+        _dispatch_group,
         dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDatabaseLoadTimeoutSecs * NSEC_PER_SEC)));
-    if (result != 0) {
+    if (isErrorOrTimeout) {
       FIRLogError(kFIRLoggerRemoteConfig, @"I-RCN000048",
                   @"Timed out waiting for fetched config to be loaded from DB");
       return false;
@@ -373,6 +396,51 @@ static const NSTimeInterval kDatabaseLoadTimeoutSecs = 30.0;
     _isConfigLoadFromDBCompleted = true;
   }
   return true;
+}
+
+// Compare fetched config with active config and output what has changed
+- (FIRRemoteConfigUpdate *)getConfigUpdateForNamespace:(NSString *)FIRNamespace {
+  // TODO: handle diff in experiment metadata
+
+  FIRRemoteConfigUpdate *configUpdate;
+  NSMutableSet<NSString *> *updatedKeys = [[NSMutableSet alloc] init];
+
+  NSDictionary *fetchedConfig =
+      _fetchedConfig[FIRNamespace] ? _fetchedConfig[FIRNamespace] : [[NSDictionary alloc] init];
+  NSDictionary *activeConfig =
+      _activeConfig[FIRNamespace] ? _activeConfig[FIRNamespace] : [[NSDictionary alloc] init];
+  NSDictionary *fetchedP13n = _fetchedPersonalization;
+  NSDictionary *activeP13n = _activePersonalization;
+
+  // add new/updated params
+  for (NSString *key in [fetchedConfig allKeys]) {
+    if (activeConfig[key] == nil ||
+        ![[activeConfig[key] stringValue] isEqualToString:[fetchedConfig[key] stringValue]]) {
+      [updatedKeys addObject:key];
+    }
+  }
+  // add deleted params
+  for (NSString *key in [activeConfig allKeys]) {
+    if (fetchedConfig[key] == nil) {
+      [updatedKeys addObject:key];
+    }
+  }
+
+  // add params with new/updated p13n metadata
+  for (NSString *key in [fetchedP13n allKeys]) {
+    if (activeP13n[key] == nil || ![activeP13n[key] isEqualToDictionary:fetchedP13n[key]]) {
+      [updatedKeys addObject:key];
+    }
+  }
+  // add params with deleted p13n metadata
+  for (NSString *key in [activeP13n allKeys]) {
+    if (fetchedP13n[key] == nil) {
+      [updatedKeys addObject:key];
+    }
+  }
+
+  configUpdate = [[FIRRemoteConfigUpdate alloc] initWithUpdatedKeys:updatedKeys];
+  return configUpdate;
 }
 
 @end

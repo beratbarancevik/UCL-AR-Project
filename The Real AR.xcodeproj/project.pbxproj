@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -140,13 +140,13 @@
 		16515688201F91BC00C0D872 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				16D8FCFD2021DC6A004FF872 /* GoogleService-Info.plist */,
+				1629015E200ED57B00289165 /* Info.plist */,
+				16290152200ED57B00289165 /* art.scnassets */,
+				1651568E201FBDF600C0D872 /* Launch.storyboard */,
 				16290150200ED57B00289165 /* AppDelegate.swift */,
 				1651568A201F9FCD00C0D872 /* Extensions.swift */,
-				1651568E201FBDF600C0D872 /* Launch.storyboard */,
 				16290159200ED57B00289165 /* Assets.xcassets */,
-				16290152200ED57B00289165 /* art.scnassets */,
-				1629015E200ED57B00289165 /* Info.plist */,
-				16D8FCFD2021DC6A004FF872 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -154,8 +154,8 @@
 		1651568C201FA1AE00C0D872 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				16290156200ED57B00289165 /* Main.storyboard */,
 				16F6200920188DF700CC7900 /* SceneCell.swift */,
+				16290156200ED57B00289165 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,9 +163,9 @@
 		1651568D201FA1B300C0D872 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				16FF20992017EB6900461DF1 /* MainTableViewController.swift */,
 				16F6200D2018C42E00CC7900 /* AddNameViewController.swift */,
 				16CC8160202A78E8007FE2F5 /* CreateSceneViewController.swift */,
+				16FF20992017EB6900461DF1 /* MainTableViewController.swift */,
 				16AFE130200F5F66009C8DEF /* RectangleViewController.swift */,
 			);
 			path = Controller;
@@ -183,10 +183,10 @@
 		16C86623202CAB08005FEBE1 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				16AFE159200F60FF009C8DEF /* Nodes */,
-				162F04452014ADBB00D12F50 /* Extensions + Utilities */,
-				16AFE133200F5FEE009C8DEF /* PlaneRectangle.swift */,
 				16AFE132200F5FEE009C8DEF /* Message.swift */,
+				16AFE133200F5FEE009C8DEF /* PlaneRectangle.swift */,
+				162F04452014ADBB00D12F50 /* Extensions + Utilities */,
+				16AFE159200F60FF009C8DEF /* Nodes */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -228,8 +228,9 @@
 		16290145200ED57B00289165 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Auvitas;
 				TargetAttributes = {
 					1629014C200ED57B00289165 = {
@@ -240,7 +241,7 @@
 				};
 			};
 			buildConfigurationList = 16290148200ED57B00289165 /* Build configuration list for PBXProject "The Real AR" */;
-			compatibilityVersion = "Xcode 11.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -405,7 +406,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -459,7 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -476,7 +477,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F6DZGK2N5H;
 				INFOPLIST_FILE = "$(SRCROOT)/The Real AR/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,7 +498,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F6DZGK2N5H;
 				INFOPLIST_FILE = "$(SRCROOT)/The Real AR/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
