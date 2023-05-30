@@ -3,12 +3,12 @@ import UIKit
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    // MARK: - UI Variables
+
+    // MARK: - UI Properties
 
 	var window: UIWindow?
-    
-    // MARK: - App Delegate Methods
+
+    // MARK: - UIApplicationDelegate
 
 	func application(
         _ application: UIApplication,

@@ -1,6 +1,6 @@
 final class Step {
     
-    // MARK: - Variables
+    // MARK: - Properties
 	
 	var stepNumber: String
 	var virtualObjects: [VirtualObject]

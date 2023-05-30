@@ -1,14 +1,14 @@
 import UIKit
 
 extension UIView {
-    
+
     // MARK: - Camera-Geometry
-    
+
     // Converts a point from camera coordinates (0 to 1 or -1 to 0, depending on orientation)
     // into a point within the given view
     func convertFromCamera(_ point: CGPoint) -> CGPoint {
         let orientation = UIApplication.shared.statusBarOrientation
-        
+
         switch orientation {
         case .portrait, .unknown:
             return CGPoint(x: point.y * frame.width, y: point.x * frame.height)
@@ -22,13 +22,13 @@ extension UIView {
             return CGPoint(x: point.y * frame.width, y: point.x * frame.height)
         }
     }
-    
+
     // Converts a rect from camera coordinates (0 to 1 or -1 to 0, depending on orientation)
     // into a point within the given view
     func convertFromCamera(_ rect: CGRect) -> CGRect {
         let orientation = UIApplication.shared.statusBarOrientation
         let x, y, w, h: CGFloat
-        
+
         switch orientation {
         case .portrait, .unknown:
             w = rect.height
@@ -56,7 +56,7 @@ extension UIView {
             x = rect.origin.y
             y = rect.origin.x
         }
-        
+
         return CGRect(
             x: x * frame.width,
             y: y * frame.height,

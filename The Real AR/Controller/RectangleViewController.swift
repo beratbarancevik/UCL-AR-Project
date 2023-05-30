@@ -34,12 +34,12 @@ final class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSess
     // MARK: - Rendered items
     
     // RectangleNodes with keys for rectangleObservation.uuid
-    private var rectangleNodes = [VNRectangleObservation:RectangleNode]()
+    private var rectangleNodes = [VNRectangleObservation: RectangleNode]()
     
     // Used to lookup SurfaceNodes by planeAnchor and update them
-    private var surfaceNodes = [ARPlaneAnchor:SurfaceNode]()
+    private var surfaceNodes = [ARPlaneAnchor: SurfaceNode]()
     
-    // MARK: - Debug properties
+    // MARK: - Debug Properties
     
     var showDebugOptions = false {
         didSet {
@@ -72,7 +72,7 @@ final class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSess
         }
     }
     
-    // MARK: - View Controller Life Cycle Methods
+    // MARK: - Lifecycle
     
     override var prefersStatusBarHidden: Bool { true }
     
@@ -262,7 +262,7 @@ final class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSess
         surfaceNodes.removeValue(forKey: anchor)
     }
     
-    // MARK: - Helper Methods
+    // MARK: - Helper
     
     // Updates selectedRectangleObservation with the the rectangle found in the given ARFrame at the
     // given location
@@ -273,7 +273,7 @@ final class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSess
         
         // Perform request on background thread
         DispatchQueue.global(qos: .background).async {
-            let request = VNDetectRectanglesRequest(completionHandler: { (request, error) in
+            let request = VNDetectRectanglesRequest(completionHandler: { request, _ in
                 
                 // Jump back onto the main thread
                 DispatchQueue.main.async {
@@ -284,8 +284,8 @@ final class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSess
                     // Access the first result in the array after casting the array as a
                     // VNClassificationObservation array
                     guard let observations = request.results as? [VNRectangleObservation],
-                        let _ = observations.first else {
-                            print ("No results")
+                        observations.first != nil else {
+                            print("No results")
                             self.message = .errNoRect
                             return
                     }
@@ -536,7 +536,9 @@ final class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSess
             
             return node
         } else if self.objectToPlace == .circleRightArrow {
-            guard let url = Bundle.main.url(forResource: "art.scnassets/arrow_right_circle", withExtension: "dae") else {
+            guard let url = Bundle.main.url(
+                forResource: "art.scnassets/arrow_right_circle", withExtension: "dae"
+            ) else {
                 print("Could not find circle right arrow scene")
                 return nil
             }
@@ -630,7 +632,7 @@ final class RectangleViewController: UIViewController, ARSCNViewDelegate, ARSess
         present(alert, animated: true)
     }
     
-    var nodesArray = Array<SCNNode>()
+    var nodesArray = [SCNNode]()
     
     @IBAction func nextDidTap(_ sender: UIButton) {
         for item in nodesArray {

@@ -1,15 +1,15 @@
 final class VirtualObject {
-    
-    // MARK: - Variables
-	
+
+    // MARK: - Properties
+
 	var type: VirtualObjectType
 	var xCoor: Float
 	var yCoor: Float
 	var zCoor: Float
 	var text: String
-    
+
     // MARK: - Initialization
-	
+
 	// for all virtual objects apart from text
 	init?(type: VirtualObjectType, xCoor: Float, yCoor: Float, zCoor: Float) {
 		self.type = type
@@ -18,7 +18,7 @@ final class VirtualObject {
 		self.zCoor = zCoor
 		self.text = ""
 	}
-	
+
 	// for text
 	init?(type: VirtualObjectType, xCoor: Float, yCoor: Float, zCoor: Float, text: String) {
 		self.type = type

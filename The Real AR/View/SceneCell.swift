@@ -2,11 +2,11 @@ import UIKit
 
 final class SceneCell: UITableViewCell {
     
-    // MARK: - UI Variables
+    // MARK: - UI Properties
     
     @IBOutlet weak var sceneNameLabel: UILabel!
     
-    // MARK: - Variables
+    // MARK: - Properties
 
 	var scene: Scene? {
 		didSet {

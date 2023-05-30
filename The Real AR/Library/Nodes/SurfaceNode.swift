@@ -2,7 +2,7 @@ import ARKit
 
 final class SurfaceNode: SCNNode {
     
-    // MARK: - Variables
+    // MARK: - Properties
     
     private(set) var anchor: ARPlaneAnchor
     private(set) var planeGeometry: SCNPlane

@@ -1,28 +1,23 @@
 import ARKit
 
 extension ARHitTestResult {
-    
-    // MARK: - Variables
-    
+
+    // MARK: - Properties
+
     var worldVector: SCNVector3 {
-        get {
-            SCNVector3Make(
-                worldTransform.columns.3.x,
-                worldTransform.columns.3.y,
-                worldTransform.columns.3.z)
-        }
+        SCNVector3Make(
+            worldTransform.columns.3.x,
+            worldTransform.columns.3.y,
+            worldTransform.columns.3.z
+        )
     }
 }
 
 extension Array where Element: ARHitTestResult {
-    
-    // MARK: - Variables
-    
+
+    // MARK: - Properties
+
     var closest: ARHitTestResult? {
-        get {
-            return sorted { (result1, result2) -> Bool in
-                return result1.distance < result2.distance
-            }.first
-        }
+        sorted { $0.distance < $1.distance }.first
     }
 }

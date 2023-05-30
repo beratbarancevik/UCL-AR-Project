@@ -3,7 +3,7 @@ import Vision
 
 class PlaneRectangle: NSObject {
     
-    // MARK: - Variables
+    // MARK: - Properties
     
     // Plane anchor this rectangle is attached to
     private(set) var anchor: ARPlaneAnchor
@@ -47,7 +47,7 @@ class PlaneRectangle: NSObject {
     }
 }
 
-fileprivate enum RectangleCorners {
+private enum RectangleCorners {
     case topLeft(topLeft: SCNVector3, topRight: SCNVector3, bottomLeft: SCNVector3)
     case topRight(topLeft: SCNVector3, topRight: SCNVector3, bottomRight: SCNVector3)
     case bottomLeft(topLeft: SCNVector3, bottomLeft: SCNVector3, bottomRight: SCNVector3)
@@ -58,7 +58,7 @@ fileprivate enum RectangleCorners {
 
 // Finds 3d vector points for the corners of a rectangle on a plane in a given scene
 // Returns 3 corners representing the rectangle as well as the anchor for its plane
-fileprivate func getCorners(
+private func getCorners(
     for rectangle: VNRectangleObservation,
     in sceneView: ARSCNView
     ) -> (corners: RectangleCorners, anchor: ARPlaneAnchor)? {
@@ -87,8 +87,7 @@ fileprivate func getCorners(
     let hitResultAnchorComparator: (ARHitTestResult, ARHitTestResult) -> Bool = { (hit1, hit2) in
         hit1.anchor == hit2.anchor
     }
-    
-    
+
     // Check top & left corners for a common anchor
     var surfaces = filterByIntersection([tl, tr, bl], where: hitResultAnchorComparator)
     if let tlHit = surfaces[0].first,
@@ -166,83 +165,73 @@ fileprivate func getCorners(
 
 extension RectangleCorners {
     
-    // MARK: - Variables
+    // MARK: - Properties
     
     // Returns width based on left and right corners for one either top or bottom side
     var width: CGFloat {
-        get {
-            switch self {
-            case .topLeft(let left, let right, _),
-                 .topRight(let left, let right, _),
-                 .bottomLeft(_, let left, let right),
-                 .bottomRight(_, let left, let right):
-                return right.distance(from: left)
-            }
+        switch self {
+        case .topLeft(let left, let right, _),
+                .topRight(let left, let right, _),
+                .bottomLeft(_, let left, let right),
+                .bottomRight(_, let left, let right):
+            return right.distance(from: left)
         }
     }
     
     // Returns height based on top and bottom corners for either left or right side
     var height: CGFloat {
-        get {
-            switch self {
-            case .topLeft(let top, _, let bottom),
-                 .topRight(_, let top, let bottom),
-                 .bottomLeft(let top, let bottom, _),
-                 .bottomRight(let top, _, let bottom):
-                return top.distance(from: bottom)
-            }
+        switch self {
+        case .topLeft(let top, _, let bottom),
+                .topRight(_, let top, let bottom),
+                .bottomLeft(let top, let bottom, _),
+                .bottomRight(let top, _, let bottom):
+            return top.distance(from: bottom)
         }
     }
     
     // Returns the midpoint from opposite corners of rectangle
     var center: SCNVector3 {
-        get {
-            switch self {
-            case .topLeft(_, let c1, let c2),
-                 .topRight(let c1, _, let c2),
-                 .bottomRight(let c1, let c2, _),
-                 .bottomLeft(let c1, _, let c2):
-                return c1.midpoint(from: c2)
-            }
+        switch self {
+        case .topLeft(_, let c1, let c2),
+                .topRight(let c1, _, let c2),
+                .bottomRight(let c1, let c2, _),
+                .bottomLeft(let c1, _, let c2):
+            return c1.midpoint(from: c2)
         }
     }
     
     // Returns the angle of the vertex corner
     var cornerAngle: CGFloat {
-        get {
-            switch self {
+        switch self {
             // c is the vertex and a & b are the points of the other corners
-            case .topLeft(let c, let a, let b),
-                 .topRight(let a, let c, let b),
-                 .bottomLeft(let a, let c, let b),
-                 .bottomRight(let a, let b, let c):
-                
-                let distA = c.distance(from: b)
-                let distB = c.distance(from: a)
-                let distC = a.distance(from: b)
-                
-                let cosC = ((distA * distA) +
-                    (distB * distB) -
-                    (distC * distC)) /
-                    (2 * distA * distB)
-                return acos(cosC)
-            }
+        case .topLeft(let c, let a, let b),
+                .topRight(let a, let c, let b),
+                .bottomLeft(let a, let c, let b),
+                .bottomRight(let a, let b, let c):
+
+            let distA = c.distance(from: b)
+            let distB = c.distance(from: a)
+            let distC = a.distance(from: b)
+
+            let cosC = ((distA * distA) +
+                        (distB * distB) -
+                        (distC * distC)) /
+            (2 * distA * distB)
+            return acos(cosC)
         }
     }
     
     // Returns the orientation of the rectangle based on how much the rectangle is rotated around
     // the y axis
     var orientation: Float {
-        get {
-            switch self {
-            case .topLeft(let left, let right, _),
-                 .topRight(let left, let right, _),
-                 .bottomLeft(_, let left, let right),
-                 .bottomRight(_, let left, let right):
-                let distX = right.x - left.x
-                let distZ = right.z - left.z
-                return -atan(distZ / distX)
-            }
+        switch self {
+        case .topLeft(let left, let right, _),
+                .topRight(let left, let right, _),
+                .bottomLeft(_, let left, let right),
+                .bottomRight(_, let left, let right):
+            let distX = right.x - left.x
+            let distZ = right.z - left.z
+            return -atan(distZ / distX)
         }
     }
 }

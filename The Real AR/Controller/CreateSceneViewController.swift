@@ -5,62 +5,62 @@ import UIKit
 import Vision
 
 final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
-    
+
     // MARK: - UI Properties
-    
+
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messageView: UIView!
-    
+
     // MARK: - Properties
-    
+
     var sceneName: String?
-    
+
     var isReferenceSet = false
-    
+
     var referenceObject: VirtualObject? {
         didSet {
             isReferenceSet = true
         }
     }
-    
+
     var stepNumber = 1
-    
+
     var virtualObjects = [VirtualObject]()
-    
+
     var objectToPlace: VirtualObjectType = .pin
-    
+
     var enteredTexts = [String]()
-    
+
     var enteredTextsIndexHolder = 0
-    
+
     // MARK: - Internal properties used to identify the rectangle the user is selecting
-    
+
     // Displayed rectangle outline
     private var selectedRectangleOutlineLayer: CAShapeLayer?
-    
+
     // Observed rectangle currently being touched
     private var selectedRectangleObservation: VNRectangleObservation?
-    
+
     // The time the current rectangle selection was last updated
     private var selectedRectangleLastUpdated: Date?
-    
+
     // Current touch location
     private var currTouchLocation: CGPoint?
-    
+
     // Gets set to true when actively searching for rectangles in the current frame
     private var searchingForRectangles = false
-    
+
     // MARK: - Rendered items
-    
+
     // RectangleNodes with keys for rectangleObservation.uuid
     private var rectangleNodes = [VNRectangleObservation: RectangleNode]()
-    
+
     // Used to lookup SurfaceNodes by planeAnchor and update them
     private var surfaceNodes = [ARPlaneAnchor: SurfaceNode]()
-    
+
     // MARK: - Debug properties
-    
+
     var showDebugOptions = false {
         didSet {
             if showDebugOptions {
@@ -73,9 +73,9 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
             }
         }
     }
-    
+
     // MARK: - Message displayed to the user
-    
+
     private var message: Message? {
         didSet {
             DispatchQueue.main.async {
@@ -91,76 +91,73 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
             }
         }
     }
-    
+
     // MARK: - Lifecycle
-    
+
     override var prefersStatusBarHidden: Bool { true }
-    
+
     var sceneCoordinates = [String]()
     var stringCoordinates = [String]()
     var floatCoordinates = [Float]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // set the view's delegates
         sceneView.delegate = self
-        
+
         // comment out to disable rectangle tracking
         sceneView.session.delegate = self
-        
+
         // enable default lighting
         sceneView.autoenablesDefaultLighting = true
-        
+
         // create a new scene
         let scene = SCNScene()
         sceneView.scene = scene
-        
+
         // don't display message
         message = nil
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        
+
         // create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
-        
+
         // run the sceneView session
         sceneView.session.run(configuration)
-        
+
         // tell user to find the a surface if we don't know of any
         if surfaceNodes.isEmpty {
             message = .helpFindSurface
         }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
-        
+
         // pause the view's session
         sceneView.session.pause()
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first,
-            let currentFrame = sceneView.session.currentFrame else {
-                return
-        }
-        
+        guard let touch = touches.first, let currentFrame = sceneView.session.currentFrame else { return }
+
         currTouchLocation = touch.location(in: sceneView)
-        
+
         if isReferenceSet {
             // perform hit test
             let results = sceneView.hitTest(currTouchLocation!, types: .existingPlaneUsingExtent)
-            
+
             // if a hit was received, get position of
             if let result = results.first {
                 placePin(result)
-                
+
                 let transform = result.worldTransform
                 let x = (referenceObject?.xCoor)! - transform.columns.3.x
                 let y = (referenceObject?.yCoor)! - transform.columns.3.y
@@ -169,101 +166,82 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
                 virtualObjects.append(virtualObject!)
             }
         }
-        
+
         findRectangle(locationInScene: currTouchLocation!, frame: currentFrame)
         message = .helpTapReleaseRect
     }
-    
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Ignore if we're currently searching for a rect
-        if searchingForRectangles {
-            return
-        }
-        
-        guard let touch = touches.first,
-            let currentFrame = sceneView.session.currentFrame else {
-                return
-        }
-        
+        if searchingForRectangles { return }
+
+        guard let touch = touches.first, let currentFrame = sceneView.session.currentFrame else { return }
+
         currTouchLocation = touch.location(in: sceneView)
         findRectangle(locationInScene: currTouchLocation!, frame: currentFrame)
     }
-    
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         currTouchLocation = nil
         message = .helpTapHoldRect
-        
-        guard let selectedRect = selectedRectangleObservation else {
-            return
-        }
-        
+
+        guard let selectedRect = selectedRectangleObservation else { return }
+
         // Create a planeRect and add a RectangleNode
         addPlaneRect(for: selectedRect)
     }
-    
-    
+
     // MARK: - ARSessionDelegate
-    
+
     // Update selected rectangle if it's been more than 1 second and the screen is still being
     // touched
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        if searchingForRectangles {
-            return
-        }
-        
+        if searchingForRectangles { return }
+
         guard let currTouchLocation = currTouchLocation,
-            let currentFrame = sceneView.session.currentFrame else {
-                return
-        }
-        
+              let currentFrame = sceneView.session.currentFrame
+        else { return }
+
         if selectedRectangleLastUpdated?.timeIntervalSinceNow ?? 0 < 1 {
             return
         }
-        
+
         findRectangle(locationInScene: currTouchLocation, frame: currentFrame)
     }
-    
-    
+
     // MARK: - ARSCNViewDelegate
-    
+
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let anchor = anchor as? ARPlaneAnchor else {
             return
         }
-        
+
         let surface = SurfaceNode(anchor: anchor)
         surfaceNodes[anchor] = surface
         node.addChildNode(surface)
-        
+
         if message == .helpFindSurface {
             message = .helpTapHoldRect
         }
     }
-    
+
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         // See if this is a plane we are currently rendering
-        guard let anchor = anchor as? ARPlaneAnchor,
-            let surface = surfaceNodes[anchor] else {
-                return
-        }
-        
+        guard let anchor = anchor as? ARPlaneAnchor, let surface = surfaceNodes[anchor] else { return }
+
         surface.update(anchor)
     }
-    
+
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        guard let anchor = anchor as? ARPlaneAnchor,
-            let surface = surfaceNodes[anchor] else {
-                return
-        }
-        
+        guard let anchor = anchor as? ARPlaneAnchor, let surface = surfaceNodes[anchor] else { return }
+
         surface.removeFromParentNode()
-        
+
         surfaceNodes.removeValue(forKey: anchor)
     }
-    
-    
-    // MARK: - Helper Methods
-    
+
+    // MARK: - Helper
+
     // Updates selectedRectangleObservation with the the rectangle found in the given ARFrame at the
     // given location
     private func findRectangle(locationInScene location: CGPoint, frame currentFrame: ARFrame) {
@@ -273,7 +251,7 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
         
         // Perform request on background thread
         DispatchQueue.global(qos: .background).async {
-            let request = VNDetectRectanglesRequest(completionHandler: { (request, error) in
+            let request = VNDetectRectanglesRequest(completionHandler: { request, _ in
                 
                 // Jump back onto the main thread
                 DispatchQueue.main.async {
@@ -284,8 +262,9 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
                     // Access the first result in the array after casting the array as a
                     // VNClassificationObservation array
                     guard let observations = request.results as? [VNRectangleObservation],
-                        let _ = observations.first else {
-                        print ("No results")
+                        observations.first != nil
+                    else {
+                        print("No results")
                         self.message = .errNoRect
                         return
                     }
@@ -510,7 +489,9 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
             
             return node
         } else if self.objectToPlace == .circleRightArrow {
-            guard let url = Bundle.main.url(forResource: "art.scnassets/arrow_right_circle", withExtension: "dae") else {
+            guard let url = Bundle.main.url(
+                forResource: "art.scnassets/arrow_right_circle", withExtension: "dae"
+            ) else {
                 print("Could not find circle right arrow scene")
                 return nil
             }
@@ -598,7 +579,6 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
         nodesArray.append(pinNode)
     }
     
-    
     private func drawPolygon(_ points: [CGPoint], color: UIColor) -> CAShapeLayer {
         let layer = CAShapeLayer()
         layer.fillColor = nil
@@ -612,8 +592,7 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
         layer.path = path.cgPath
         return layer
     }
-    
-    
+
     // MARK: button actions
     
     @IBAction func saveDidTap(_ sender: Any) {
@@ -627,11 +606,26 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
                 let typeInt = typeGenerator(from: virtualObject.type)
                 
                 if typeInt != 10 {
-                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor] as [String : Any]) { (error, ref) in
+                    ref.child(scenePath).setValue(
+                        [
+                            "t": typeInt,
+                            "x": virtualObject.xCoor,
+                            "y": virtualObject.yCoor,
+                            "z": virtualObject.zCoor
+                        ] as [String: Any]
+                    ) { _, _ in
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                 } else {
-                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor, "text": enteredTexts[enteredTextsIndexHolder]] as [String : Any]) { (error, ref) in
+                    ref.child(scenePath).setValue(
+                        [
+                            "t": typeInt,
+                            "x": virtualObject.xCoor,
+                            "y": virtualObject.yCoor,
+                            "z": virtualObject.zCoor,
+                            "text": enteredTexts[enteredTextsIndexHolder]
+                        ] as [String: Any]
+                    ) { _, _ in
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                     
@@ -641,7 +635,7 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
                 counter += 1
             }
         } else {
-            self.navigationController?.popToRootViewController(animated: true)
+            navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -694,26 +688,34 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
                 let typeInt = typeGenerator(from: virtualObject.type)
                 
                 if typeInt != 10 {
-                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor] as [String : Any]) { (error, ref) in
-                        
-                    }
+                    ref.child(scenePath).setValue(
+                        [
+                            "t": typeInt,
+                            "x": virtualObject.xCoor,
+                            "y": virtualObject.yCoor,
+                            "z": virtualObject.zCoor
+                        ] as [String: Any]
+                    ) { _, _ in }
                 } else {
-                    ref.child(scenePath).setValue(["t": typeInt, "x": virtualObject.xCoor, "y": virtualObject.yCoor, "z": virtualObject.zCoor, "text": enteredTexts[enteredTextsIndexHolder]] as [String : Any]) { (error, ref) in
-                        
-                    }
+                    ref.child(scenePath).setValue(
+                        [
+                            "t": typeInt,
+                            "x": virtualObject.xCoor,
+                            "y": virtualObject.yCoor,
+                            "z": virtualObject.zCoor,
+                            "text": enteredTexts[enteredTextsIndexHolder]
+                        ] as [String: Any]
+                    ) { _, _ in }
                     
                     enteredTextsIndexHolder += 1
                 }
                 
-                
                 counter += 1
             }
-            
             
             for item in nodesArray {
                 item.removeFromParentNode()
             }
-            
             
             // clear arrays
             virtualObjects.removeAll()
@@ -729,34 +731,34 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
     
     @IBAction func objectDidTap(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Select Object", message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Pin", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Pin", style: .default, handler: { (_) in
             self.objectToPlace = .pin
         }))
-        alertController.addAction(UIAlertAction(title: "Up Arrow", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Up Arrow", style: .default, handler: { (_) in
             self.objectToPlace = .upArrow
         }))
-        alertController.addAction(UIAlertAction(title: "Down Arrow", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Down Arrow", style: .default, handler: { (_) in
             self.objectToPlace = .downArrow
         }))
-        alertController.addAction(UIAlertAction(title: "Right Arrow", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Right Arrow", style: .default, handler: { (_) in
             self.objectToPlace = .rightArrow
         }))
-        alertController.addAction(UIAlertAction(title: "Left Arrow", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Left Arrow", style: .default, handler: { (_) in
             self.objectToPlace = .leftArrow
         }))
-        alertController.addAction(UIAlertAction(title: "Circle Up Arrow", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Circle Up Arrow", style: .default, handler: { (_) in
             self.objectToPlace = .circleUpArrow
         }))
-        alertController.addAction(UIAlertAction(title: "Circle Down Arrow", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Circle Down Arrow", style: .default, handler: { (_) in
             self.objectToPlace = .circleDownArrow
         }))
-        alertController.addAction(UIAlertAction(title: "Circle Right Arrow", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Circle Right Arrow", style: .default, handler: { (_) in
             self.objectToPlace = .circleRightArrow
         }))
-        alertController.addAction(UIAlertAction(title: "Circle Left Arrow", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Circle Left Arrow", style: .default, handler: { (_) in
             self.objectToPlace = .circleLeftArrow
         }))
-        alertController.addAction(UIAlertAction(title: "Text", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Text", style: .default, handler: { (_) in
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             let textView = UITextView()
             textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -769,7 +771,13 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
             
             alert.setValue(controller, forKey: "contentViewController")
             
-            let height: NSLayoutConstraint = NSLayoutConstraint(item: alert.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.1, constant: self.view.frame.height * 0.4)
+            let height = NSLayoutConstraint(
+                item: alert.view as Any,
+                attribute: .height, relatedBy: .equal,
+                toItem: nil, attribute: .notAnAttribute,
+                multiplier: 0.1,
+                constant: self.view.frame.height * 0.4
+            )
             alert.view.addConstraint(height)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -784,8 +792,7 @@ final class CreateSceneViewController: UIViewController, ARSCNViewDelegate, ARSe
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             
             self.present(alert, animated: true)
-            
-            
+
             textView.becomeFirstResponder()
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
