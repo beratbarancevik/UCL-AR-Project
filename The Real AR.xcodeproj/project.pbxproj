@@ -30,11 +30,11 @@
 		16F6200C20188E1C00CC7900 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6200B20188E1C00CC7900 /* Scene.swift */; };
 		16F6200E2018C42E00CC7900 /* AddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6200D2018C42E00CC7900 /* AddNameViewController.swift */; };
 		16FF209A2017EB6900461DF1 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FF20992017EB6900461DF1 /* MainTableViewController.swift */; };
-		1D2F20521A153B5643563482 /* Pods_The_Real_AR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2059491EF8D735E1AE7AE9C /* Pods_The_Real_AR.framework */; };
 		F406B96D2A2654220083F232 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F406B96C2A2654220083F232 /* FirebaseAnalytics */; };
 		F406B96F2A2654220083F232 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = F406B96E2A2654220083F232 /* FirebaseDatabase */; };
 		F406B9712A2654220083F232 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = F406B9702A2654220083F232 /* FirebasePerformance */; };
 		F406B9732A2654220083F232 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F406B9722A2654220083F232 /* FirebaseStorage */; };
+		F4A1406A2A26554000C4AB10 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = F4A140692A26554000C4AB10 /* SwiftMessages */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,9 +64,6 @@
 		16F6200B20188E1C00CC7900 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		16F6200D2018C42E00CC7900 /* AddNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNameViewController.swift; sourceTree = "<group>"; };
 		16FF20992017EB6900461DF1 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
-		27F4B4AC5C4788844BF98F5B /* Pods-The Real AR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Real AR.debug.xcconfig"; path = "Target Support Files/Pods-The Real AR/Pods-The Real AR.debug.xcconfig"; sourceTree = "<group>"; };
-		A1809DE3B18EF35F54D6F068 /* Pods-The Real AR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Real AR.release.xcconfig"; path = "Target Support Files/Pods-The Real AR/Pods-The Real AR.release.xcconfig"; sourceTree = "<group>"; };
-		D2059491EF8D735E1AE7AE9C /* Pods_The_Real_AR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_The_Real_AR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,28 +75,18 @@
 				F406B96D2A2654220083F232 /* FirebaseAnalytics in Frameworks */,
 				F406B9712A2654220083F232 /* FirebasePerformance in Frameworks */,
 				F406B9732A2654220083F232 /* FirebaseStorage in Frameworks */,
-				1D2F20521A153B5643563482 /* Pods_The_Real_AR.framework in Frameworks */,
+				F4A1406A2A26554000C4AB10 /* SwiftMessages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F038CC5A0F0B3754DEA9E4C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D2059491EF8D735E1AE7AE9C /* Pods_The_Real_AR.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		16290144200ED57B00289165 = {
 			isa = PBXGroup;
 			children = (
 				1629014F200ED57B00289165 /* The Real AR */,
 				1629014E200ED57B00289165 /* Products */,
-				D024798C4C224925F31F5797 /* Pods */,
-				0F038CC5A0F0B3754DEA9E4C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,11 +102,11 @@
 			isa = PBXGroup;
 			children = (
 				16BB47D42096C94B003712CF /* README.md */,
-				16515685201F902800C0D872 /* Model */,
-				1651568C201FA1AE00C0D872 /* View */,
 				1651568D201FA1B300C0D872 /* Controller */,
-				16515688201F91BC00C0D872 /* Supporting Files */,
 				16C86623202CAB08005FEBE1 /* Library */,
+				16515685201F902800C0D872 /* Model */,
+				16515688201F91BC00C0D872 /* Supporting Files */,
+				1651568C201FA1AE00C0D872 /* View */,
 			);
 			path = "The Real AR";
 			sourceTree = "<group>";
@@ -199,15 +186,6 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
-		D024798C4C224925F31F5797 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				27F4B4AC5C4788844BF98F5B /* Pods-The Real AR.debug.xcconfig */,
-				A1809DE3B18EF35F54D6F068 /* Pods-The Real AR.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -215,11 +193,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 16290161200ED57B00289165 /* Build configuration list for PBXNativeTarget "The Real AR" */;
 			buildPhases = (
-				104F5CDB17B718D3C3DABD8F /* [CP] Check Pods Manifest.lock */,
 				16290149200ED57B00289165 /* Sources */,
 				1629014A200ED57B00289165 /* Frameworks */,
 				1629014B200ED57B00289165 /* Resources */,
-				7F2CC330BBE3DFAFDD57FD58 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -231,6 +207,7 @@
 				F406B96E2A2654220083F232 /* FirebaseDatabase */,
 				F406B9702A2654220083F232 /* FirebasePerformance */,
 				F406B9722A2654220083F232 /* FirebaseStorage */,
+				F4A140692A26554000C4AB10 /* SwiftMessages */,
 			);
 			productName = "The Real AR";
 			productReference = 1629014D200ED57B00289165 /* The Real AR.app */;
@@ -265,6 +242,7 @@
 			mainGroup = 16290144200ED57B00289165;
 			packageReferences = (
 				F406B96B2A2654220083F232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F4A140682A26554000C4AB10 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = 1629014E200ED57B00289165 /* Products */;
 			projectDirPath = "";
@@ -289,48 +267,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		104F5CDB17B718D3C3DABD8F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-The Real AR-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F2CC330BBE3DFAFDD57FD58 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-The Real AR/Pods-The Real AR-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-The Real AR/Pods-The Real AR-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-The Real AR/Pods-The Real AR-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		16290149200ED57B00289165 /* Sources */ = {
@@ -488,7 +424,6 @@
 		};
 		16290162200ED57B00289165 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27F4B4AC5C4788844BF98F5B /* Pods-The Real AR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -509,7 +444,6 @@
 		};
 		16290163200ED57B00289165 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1809DE3B18EF35F54D6F068 /* Pods-The Real AR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -560,6 +494,14 @@
 				version = 10.10.0;
 			};
 		};
+		F4A140682A26554000C4AB10 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = exactVersion;
+				version = 9.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -582,6 +524,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F406B96B2A2654220083F232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		F4A140692A26554000C4AB10 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4A140682A26554000C4AB10 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

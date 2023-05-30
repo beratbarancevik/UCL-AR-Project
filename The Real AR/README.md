@@ -1,6 +1,5 @@
 #  Authoring Tool iOS Application
 
-
 Please read before using the application:
 
 The code for this application is very well tested and when using the application it should work without crashing.
@@ -9,8 +8,6 @@ If this happens the illegal value should be removed from the database manually.
 Therefore, please send me an email at berat.cevik.14@ucl.ac.uk so that I can fix it.
 Otherwise the application will stop working for everyone.
 I will check the application daily to make sure this will not happen.
-
-
 
 Reference List:
 
